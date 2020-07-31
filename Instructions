@@ -1,0 +1,39 @@
+int printf(const char *format, ...);
+
+printf("%*d", width, num);
+
+Return value: the number of printed characters (excluding the null byte used to end output to strings)
+*количество напечатанных символов (не включая завершающий `\0', использующийся для обозначения конца строки данных)
+
+Cтрока параметров + спецификаторы преобразования (стоят после %)
+
+За символом %:
+Флаги: #0-+ and space
+Минимальная ширина поля
+точность
+модификаторы длины для "целых" преобразователей d, i, o, u, x или X: hh, h, l, ll - f with flags l, L
+
+Тип преобразования: d, i, o, u, x, X, f, c, s, p, %
+Выводит символ `%' без преобразующих параметров. Полный спецификатор преобразования - `%%'.
+
+Allowed functions: write, malloc, free, exit, functions of stdarg
+
+Day 01:
+start: 17.02
+end: 22.00
+
+First: #0-+ and space
+Second: field_width
+Third: precision
+Forth: conversion
+Fifth: hh, h, l, ll  ---  d, i, o, u, x, X, f, c, s, p, %
+
+	new->flags = "#0-+ "; //form_flags[0] and form_flags[1] 0+ -+
+	new->mod_len = "lh";
+	new->convert = "cspdiouxXf";
+
+Day 02:
+start: 11.30 lunch: 1.0
+end: 19.30
+
+structure done; s, c, p, fieldwidth and precision in progress
