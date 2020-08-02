@@ -10,7 +10,11 @@ int		main(void)
 	// char s[] = "Resident Evil 7";
 	// char *p;
 	// p = s;
-	int o = 20000;
-	printf("%10.1hhd\n", o);
+	unsigned int x = 200;
+	// printf("%030u\n", o);
+	// printf("%30u\n", o);
+	// printf("%-30u\n", o);
+	// printf("%Li\n", o);
+	printf("%-#10x\n", x);
 	return(0);
 }

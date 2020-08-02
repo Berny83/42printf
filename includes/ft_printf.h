@@ -20,15 +20,19 @@
 indefinite number of arguments*/
 
 #define FLAGS "#0-+ "
-#define SPECIFIER "cspdiouxXf"
+#define SPECIFIER "cspdiouxXf%"
 
 typedef struct	str_printf
 {
-	const char	*format;
-	char		*flags; //3
-	long int	fieldwidth;
-	long int	precision;
-	char		*mod_len; //2
+	const char	*cpy;
+	char		fh; //#
+	char		fz; //0
+	char		fm; //-
+	char		fp; //+
+	char		fs; //space
+	long int	width;
+	long int	precis;
+	char		*modln; //2
 	char		convs;
 
 	int			len;
@@ -38,27 +42,45 @@ typedef struct	str_printf
 
 typedef struct	s_count
 {
-	int			f;
+	int			l;
 	int			j;
 	int			k;
 }				t_count;
 
-t_printf	*ft_initialize(const char *format);
-int			parse_format(t_printf *str);
-void		fill_f(t_printf *str);
+// ----------------- main funstions ----------------------
+
 int			ft_printf(const char *format, ...);
-t_printf	*fill_flags(t_printf *str);
-t_printf	*fill_width(t_printf *str);
-t_printf	*fill_precision(t_printf *str);
-t_printf	*fill_mod_len(t_printf *str);
-t_printf	*fill_conversion(t_printf *str);
-void		parse_all(t_printf *str);
-void		parse_str(t_printf *str);
-void		ft_spacing(t_printf *str, int length);
-void		ft_errors(int i);
-void		parse_c(t_printf *str);
-void		parse_p(t_printf *str);
-t_printf	*ft_reinitialize(t_printf *str);
-// void		parse_int(va_list avs);
+int			ft_parse_format(t_printf *f);
+void		ft_get_all_flags(t_printf *f);
+
+// ----------------- init funstions -----------------------
+
+t_printf	*ft_init(const char *format);
+t_printf	*ft_reset_init(t_printf *f);
+
+// ----------------- get structure for ft_printf -----------
+
+t_printf	*get_flags_hzmps(t_printf *f);
+t_printf	*get_width(t_printf *f);
+t_printf	*get_precision(t_printf *f);
+t_printf	*get_mod_length(t_printf *f);
+t_printf	*get_conversion(t_printf *f);
+
+//----------------- print functions --------------------------
+
+void		ft_print_all(t_printf *f);
+void		ft_print_str(t_printf *f);
+void		ft_print_char(t_printf *f);
+void		ft_print_address(t_printf *f);
+void		ft_print_int(t_printf *f);
+void		ft_print_uint(t_printf *f);
+void		ft_print_oint(t_printf *f);
+void		ft_print_xXint(t_printf *f);
+
+//--------------- support functions ---------------------
+
+void				ft_spacing(char c, t_printf *f, int length);
+unsigned long long	ft_get_unum_modlen(t_printf *f);
+void				ft_errors(int i);
 
 #endif

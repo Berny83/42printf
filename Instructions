@@ -29,6 +29,8 @@ Forth: conversion
 Fifth: hh, h, l, ll  ---  d, i, o, u, x, X, f, c, s, p, %
 
 	new->flags = "#0-+ "; //form_flags[0] and form_flags[1] 0+ -+
+	**слишком длинно и вечно использовать ft_strchr - не очень 
+	**объявлю 4 char
 	new->mod_len = "lh";
 	new->convert = "cspdiouxXf";
 
@@ -37,3 +39,9 @@ start: 11.30 lunch: 1.0
 end: 19.30
 
 structure done; s, c, p, fieldwidth and precision in progress
+
+NEED TO BE DONE: 
+				max-min of all data types - int, short int, signed char, long long int, long int etc.
+				precision
+				float
+				check all done flags

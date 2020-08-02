@@ -30,5 +30,45 @@ void		ft_errors(int i)
 		ft_putendl("You can't use length modifier with %p.");
 	else if (i == 8)
 		ft_putendl("You can't use precision with %p.");
+	else if (i == 9)
+		ft_putendl("'#' flag used with ‘%d’ gnu_printf format");
+	else if (i == 10)
+		ft_putendl("'0' flag ignored with '-' flag in gnu_printf format");
+	else if (i == 11)
+		ft_putendl("' ' flag ignored with '+' flag in gnu_printf format");
+	else if (i == 12)
+		ft_putendl("You can't use this flag with %u.");
+	else if (i == 13)
+		ft_putendl("You can't use this flag with %o.");
 	exit(0);
+}
+
+void		ft_spacing(char c, t_printf *f, int length)
+{
+	int		lensp;
+
+	if ((lensp = f->width - length) > 0)
+		while (lensp > 0)
+			{
+				ft_putchar(c);
+				lensp--;
+			}
+}
+
+unsigned long long	ft_get_unum_modlen(t_printf *f)
+{
+	unsigned long long		num;
+
+	if (ft_strcmp(f->modln, "hh") == 0)
+		num = (unsigned char)va_arg(f->avs, unsigned int);
+	else if (ft_strcmp(f->modln, "h") == 0)
+		num = (unsigned short)va_arg(f->avs, unsigned int);
+	else if (ft_strcmp(f->modln, "l") == 0)
+		num = (unsigned long)va_arg(f->avs, unsigned long int);
+	else if (ft_strcmp(f->modln, "ll") == 0 || ft_strcmp(f->modln, "L") == 0)
+		num = (unsigned long long)va_arg(f->avs, unsigned long long int);
+	else
+		num = (unsigned int)va_arg(f->avs, unsigned int);
+	num = (unsigned long long)num;
+	return (num);
 }

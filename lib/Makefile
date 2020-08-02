@@ -6,7 +6,7 @@
 #    By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 17:12:11 by aagrivan          #+#    #+#              #
-#    Updated: 2020/07/29 12:13:34 by aagrivan         ###   ########.fr        #
+#    Updated: 2020/08/02 22:57:01 by aagrivan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,7 +80,12 @@ FILES_C = ft_atoi.c\
 		  ft_swap.c\
 		  ft_tolower.c\
 		  ft_toupper.c\
-		  ft_itoa_base.c
+		  ft_itoa_base.c \
+		  ft_itoa_base_address16.c \
+		  ft_itoa_base_ll.c \
+		  ft_itoa_base_ll_pos.c \
+		  ft_itoa_base_ull.c \
+		  ft_putunbr.c
 
 HEADER = includes
 

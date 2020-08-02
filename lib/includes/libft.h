@@ -6,7 +6,7 @@
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/05 17:19:32 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/07/29 12:13:06 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/03 00:32:44 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,10 @@ void				ft_swap(int *a, int *b);
 int					ft_tolower(int c);
 int					ft_toupper(int c);
 char				*ft_itoa_base(int value, int base);
+char				*ft_itoa_base_address16(unsigned long num);
+char				*ft_itoa_base_ll(long long num, int base);
+char				*ft_itoa_base_ll_pos(long long num, int base);
+char				*ft_itoa_base_ull(unsigned long long num, int base, char c);
+void				ft_putunbr(unsigned long long n);
 
 #endif

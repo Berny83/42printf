@@ -18,9 +18,13 @@ FLAGS = -Wall -Wextra -Werror -O3
 LFLAGS = -L $(LIBFT) -lft
 
 SRCS = ft_printf.c \
-		ft_parse_str.c \
-		ft_parse_all.c \
-		ft_errors.c
+		ft_get_flags.c \
+		ft_support.c \
+		ft_print_scp.c \
+		ft_print_di.c \
+		ft_print_u.c \
+		ft_print_o.c \
+		ft_print_xX.c
 SRC_DIR = srcs/
 SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
 
