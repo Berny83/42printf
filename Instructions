@@ -45,3 +45,17 @@ NEED TO BE DONE:
 				precision
 				float
 				check all done flags
+
+
+FDF useful sources:
+	https://stackoverflow.com/c/42network/questions/463 - ISO
+	https://github.com/keuhdall/images_example -MLX_IMAGE
+	https://github.com/VBrazhnik/FdF/wiki/How-to-handle-mouse-buttons-and-key-presses%3F - keys
+	https://habr.com/ru/post/234203/ - Как вращается камера в 3D играх или что такое матрица поворота
+	https://awesomeopensource.com/project/agavrel/42_CheatSheet#0x03--42-projects-guides - for fdf and printf
+	https://www.opennet.ru/man.shtml?topic=printf&category=3&russian=0 - printf
+	http://ru.manpages.org/stdarg/3 - stdarg.h
+	https://ru.wikipedia.org/wiki/Stdarg.h - stdarg.h
+	https://stackoverflow.com/c/42network/questions/798 - leaks FDF
+	http://microsin.net/programming/arm/secrets-of-printf.html - printf
+	https://docs.microsoft.com/ru-ru/cpp/cpp/data-type-ranges?view=vs-2019 - types of data
