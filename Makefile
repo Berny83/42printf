@@ -42,7 +42,7 @@ BASE = \033[0m
 
 .PHONY: all, clean, fclean, re
 
-all: libft.a $(NAME)
+all: libftprintf.a $(NAME)
 
 $(NAME): $(OBJ_P) $(HEAD_P)
 	$(CC) $(FLAGS) $(OBJ_P) $(LFLAGS) -o $(NAME)
@@ -51,9 +51,9 @@ $(OBJDIR)%.o: $(SRC_DIR)%.c $(HEAD_P)
 	mkdir -p $(OBJDIR)
 	@$(CC) $(FLAGS) -I $(LIBFT) -I $(HEAD_DIR) -o $@ -c $<
 
-libft.a:
+libftprintf.a:
 	@make -C $(LIBFT)
-	@echo "$(GREEN) libft.a was compiled$(BASE)"
+	@echo "$(GREEN) libftprintf.a was compiled$(BASE)"
 
 ex:
 	gcc $(FLAGS) ex_printf.c -o example.out
