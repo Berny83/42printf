@@ -48,11 +48,11 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 			(f->fp) ? ft_putchar('+') : ft_putchar(' ');
 		else
 			(res < 0) ? ft_putchar('-') : ft_putchar('0');
-		ft_spacing('0', f, (length + 1));
+		ft_ispacing('0', f, (length + 1));
 	}
 	else
 	{
-		ft_spacing(' ', f, (length + 1));
+		ft_ispacing(' ', f, (length + 1));
 		if (res >= 0 && (f->fs || f->fp))
 			(f->fp) ? ft_putchar('+') : ft_putchar(' ');
 		else
@@ -86,6 +86,6 @@ void			ft_print_int(t_printf *f)
 		ft_putchar('-');
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
-		(res >= 0) ? ft_spacing(' ', f, length) : ft_spacing(' ', f, (length + 1));
+		(res >= 0) ? ft_ispacing(' ', f, length) : ft_ispacing(' ', f, (length + 1));
 }
 //не обработан 0 (?), precision и maxmin hh, h, l, ll

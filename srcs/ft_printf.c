@@ -103,9 +103,9 @@ void		ft_get_all_flags(t_printf *f)
 		get_precision(f);
 	printf("precision = %li\n", f->precis);
 	get_mod_length(f);
-	printf("str->mod_len = \"%s\"\n", f->modln);
+	// printf("str->mod_len = \"%s\"\n", f->modln);
 	get_conversion(f);
-	printf("str->convs = %c\n", f->convs);
-	printf("i = %i\n", f->i);
+	// printf("str->convs = %c\n", f->convs);
+	// printf("i = %i\n", f->i);
 	ft_print_all(f);
 }

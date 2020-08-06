@@ -64,7 +64,7 @@ clean:
 	rm -rf $(OBJDIR)
 	@echo "$(GREEN) obj-files were deleted$(BASE)"
 
-fclean:
+fclean: clean
 	@make -C $(LIBFT) fclean
 	rm -rf $(NAME)
 

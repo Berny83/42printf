@@ -90,3 +90,15 @@ void					ft_print_address(t_printf *f)
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
 }
+
+void		ft_spacing(char c, t_printf *f, int length)
+{
+	int		lensp;
+
+	if ((lensp = f->width - length) > 0)
+		while (lensp > 0)
+		{
+			ft_putchar(c);
+			lensp--;
+		}
+}

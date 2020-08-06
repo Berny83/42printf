@@ -17,9 +17,9 @@
 #include "../lib/includes/libft.h"
 #include <stdarg.h>
 #include <limits.h>
-# include <unistd.h>
-# include <stdlib.h>
-# include <string.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <string.h>
 /*standard C library that allows functions to accept an 
 indefinite number of arguments*/
 
@@ -84,6 +84,7 @@ void		ft_print_xint(t_printf *f);
 //--------------- support functions ---------------------
 
 void				ft_spacing(char c, t_printf *f, int length);
+void				ft_ispacing(char c, t_printf *f, int length);
 unsigned long long	ft_get_unum_modlen(t_printf *f);
 void				ft_errors(int i);
 

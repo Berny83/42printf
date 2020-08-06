@@ -43,7 +43,7 @@ void		ft_errors(int i)
 	exit(0);
 }
 
-void		ft_spacing(char c, t_printf *f, int length)
+void		ft_ispacing(char c, t_printf *f, int length)
 {
 	int		lensp;
 
