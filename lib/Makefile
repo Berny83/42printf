@@ -6,13 +6,13 @@
 #    By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 17:12:11 by aagrivan          #+#    #+#              #
-#    Updated: 2020/08/05 20:32:17 by aagrivan         ###   ########.fr        #
+#    Updated: 2020/08/05 22:24:54 by aagrivan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY = all clean fclean re
 
-NAME = libftprintf.a
+NAME = libft.a
 
 FLAGS = -Wall -Wextra -Werror
 

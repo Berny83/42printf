@@ -16,6 +16,10 @@
 #include <stdio.h>
 #include "../lib/includes/libft.h"
 #include <stdarg.h>
+#include <limits.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <string.h>
 /*standard C library that allows functions to accept an 
 indefinite number of arguments*/
 
@@ -75,12 +79,30 @@ void		ft_print_address(t_printf *f);
 void		ft_print_int(t_printf *f);
 void		ft_print_uint(t_printf *f);
 void		ft_print_oint(t_printf *f);
-void		ft_print_xXint(t_printf *f);
+void		ft_print_xint(t_printf *f);
 
 //--------------- support functions ---------------------
 
 void				ft_spacing(char c, t_printf *f, int length);
 unsigned long long	ft_get_unum_modlen(t_printf *f);
 void				ft_errors(int i);
+
+//--------------- libft.a functions ---------------------
+
+// char				*ft_strnew(size_t size);
+// void				ft_putchar(char c);
+// void				*ft_memset(void *b, int c, size_t len);
+// char				*ft_strchr(const char *s, int c);
+// int					ft_strcmp(const char *s1, const char *s2);
+// size_t				ft_strlen(const char *s);
+// void				ft_putstr(char const *s);
+// char				*ft_strndup(const char *s1, int count);
+// char				*ft_itoa_base(int value, int base);
+// char				*ft_itoa_base_address16(unsigned long num);
+// char				*ft_itoa_base_ll(long long num, int base);
+// char				*ft_itoa_base_ll_pos(long long num, int base);
+// char				*ft_itoa_base_ull(unsigned long long num, int base, char c);
+// void				ft_putunbr(unsigned long long n);
+
 
 #endif

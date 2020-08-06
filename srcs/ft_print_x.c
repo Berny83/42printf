@@ -12,7 +12,23 @@
 
 #include "ft_printf.h"
 
-void					ft_print_xXint(t_printf *f)
+static void x_print_flags_with_width(t_printf *f, int length)
+{
+	if (f->fz)
+	{
+		ft_putchar('0');
+		(f->fh) ? ft_putchar(f->convs) : ft_putchar('0');
+		ft_spacing('0', f, (length + 2));
+	}
+	else
+	{
+		ft_spacing(' ', f, (length + 2));
+		(f->fh) ? ft_putchar('0') : ft_putchar(' ');
+		(f->fh) ? ft_putchar(f->convs) : ft_putchar(' ');
+	}
+}
+
+void					ft_print_xint(t_printf *f)
 {
 	unsigned long long	res;
 	unsigned int		length;
@@ -23,39 +39,16 @@ void					ft_print_xXint(t_printf *f)
 	if (f->fm && f->fz)
 		ft_errors(10);
 	res = ft_get_unum_modlen(f);
-	s = (f->convs == 'x') ? ft_itoa_base_ull(res, 16, 'a') : ft_itoa_base_ull(res, 16, 'A');
+	s = (f->convs == 'x') ? ft_itoa_base_ull(res, 16, 'a') : \
+	ft_itoa_base_ull(res, 16, 'A');
 	length = ft_strlen(s);
 	if (f->width > 0 && !f->fm)
-	{
-		if (f->fz && f->fh)
-			{
-				ft_putchar('0');
-				if (f->convs == 'x')
-					ft_putchar('x');
-				else if (f->convs == 'X')
-					ft_putchar('X');
-				ft_spacing('0', f, (length + 2));
-			}
-		else if (!f->fz && f->fh)
-		{
-			ft_spacing(' ', f, (length + 2));
-			ft_putchar('0');
-			if (f->convs == 'x')
-				ft_putchar('x');
-			else if (f->convs == 'X')
-				ft_putchar('X');
-		}
-		else
-			ft_spacing(' ', f, length);
-	}
+		x_print_flags_with_width(f, length);
 	if (f->fh && f->width >= 0 && f->fm)
-		{
-			ft_putchar('0');
-			if (f->convs == 'x')
-				ft_putchar('x');
-			else if (f->convs == 'X')
-				ft_putchar('X');
-		}
+	{
+		ft_putchar('0');
+		ft_putchar(f->convs);
+	}
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		(f->fh) ? ft_spacing(' ', f, (length + 2)) : ft_spacing(' ', f, length);

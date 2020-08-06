@@ -20,7 +20,7 @@ void		ft_print_all(t_printf *f)
 	(f->convs == 'd' || f->convs == 'i') ? ft_print_int(f) : 0;
 	(f->convs == 'u') ? ft_print_uint(f) : 0;
 	(f->convs == 'o') ? ft_print_oint(f) : 0;
-	(f->convs == 'x' || f->convs == 'X') ? ft_print_xXint(f) : 0;
+	(f->convs == 'x' || f->convs == 'X') ? ft_print_xint(f) : 0;
 	(f->convs == '%') ? ft_putchar('%') : 0;
 
 }
@@ -33,7 +33,6 @@ void		ft_print_str(t_printf *f)
 	res = va_arg(f->avs, char*);
 	if (ft_strchr(f->modln, 'l') || ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L'))
 		ft_errors(2);
-	// if (ft_strchr(str->flags, '0') || ft_strchr(str->flags, '+') || ft_strchr(str->flags, ' ') || ft_strchr(str->flags, '#'))
 	if (f->fh || f->fz || f->fp || f->fs)
 		ft_errors(1);
 	if (f->precis >= 0)
@@ -58,7 +57,6 @@ void		ft_print_char(t_printf *f)
 		res = (char)va_arg(f->avs, int);
 	if (ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L') || ft_strcmp(f->modln, "ll") == 0)
 		ft_errors(4);
-	// if (ft_strchr(str->flags, '0') || ft_strchr(str->flags, '+') || ft_strchr(str->flags, ' ') || ft_strchr(str->flags, '#'))
 	if (f->fh || f->fz || f->fp || f->fs)
 		ft_errors(3);
 	if (f->precis >= 0)
@@ -77,7 +75,6 @@ void					ft_print_address(t_printf *f)
 	int					length;
 	char				*s;
 
-	// if (ft_strchr(str->flags, '0') || ft_strchr(str->flags, '+') || ft_strchr(str->flags, ' ') || ft_strchr(str->flags, '#'))
 	if (f->fh || f->fz || f->fp || f->fs)
 		ft_errors(6);
 	res = (unsigned long)va_arg(f->avs, void*);

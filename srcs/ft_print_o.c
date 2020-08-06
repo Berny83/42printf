@@ -12,6 +12,20 @@
 
 #include "ft_printf.h"
 
+static void				o_print_flags_with_width(t_printf *f, int length)
+{
+	if (f->fz)
+	{
+		ft_spacing('0', f, (length + 1));
+		(f->fh) ? ft_putchar('0') : ft_putchar('0');
+	}
+	else
+	{
+		ft_spacing(' ', f, (length + 1));
+		(f->fh) ? ft_putchar('0') : ft_putchar(' ');
+	}
+}
+
 void					ft_print_oint(t_printf *f)
 {
 	unsigned long long	res;
@@ -26,20 +40,7 @@ void					ft_print_oint(t_printf *f)
 	if (f->fm && f->fz)
 		ft_errors(10);
 	if (f->width > 0 && !f->fm)
-	{
-		if (f->fz && f->fh)
-			{
-				ft_spacing('0', f, (length + 1));
-				ft_putchar('0');
-			}
-		else if (!f->fz && f->fh)
-		{
-			ft_spacing(' ', f, (length + 1));
-			ft_putchar('0');
-		}
-		else
-			ft_spacing(' ', f, length);
-	}
+		o_print_flags_with_width(f, length);
 	if (f->fh && f->width >= 0 && f->fm)
 		ft_putchar('0');
 	ft_putstr(s);

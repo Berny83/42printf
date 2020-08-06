@@ -49,10 +49,10 @@ void		ft_spacing(char c, t_printf *f, int length)
 
 	if ((lensp = f->width - length) > 0)
 		while (lensp > 0)
-			{
-				ft_putchar(c);
-				lensp--;
-			}
+		{
+			ft_putchar(c);
+			lensp--;
+		}
 }
 
 unsigned long long	ft_get_unum_modlen(t_printf *f)

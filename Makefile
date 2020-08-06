@@ -24,7 +24,8 @@ SRCS = ft_printf.c \
 		ft_print_di.c \
 		ft_print_u.c \
 		ft_print_o.c \
-		ft_print_xX.c
+		ft_print_x.c \
+		main.c
 SRC_DIR = srcs/
 SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
 
@@ -42,7 +43,7 @@ BASE = \033[0m
 
 .PHONY: all, clean, fclean, re
 
-all: libftprintf.a $(NAME)
+all: libft.a $(NAME)
 
 $(NAME): $(OBJ_P) $(HEAD_P)
 	$(CC) $(FLAGS) $(OBJ_P) $(LFLAGS) -o $(NAME)
@@ -51,9 +52,9 @@ $(OBJDIR)%.o: $(SRC_DIR)%.c $(HEAD_P)
 	mkdir -p $(OBJDIR)
 	@$(CC) $(FLAGS) -I $(LIBFT) -I $(HEAD_DIR) -o $@ -c $<
 
-libftprintf.a:
+libft.a:
 	@make -C $(LIBFT)
-	@echo "$(GREEN) libftprintf.a was compiled$(BASE)"
+	@echo "$(GREEN) libft.a was compiled$(BASE)"
 
 ex:
 	gcc $(FLAGS) ex_printf.c -o example.out
