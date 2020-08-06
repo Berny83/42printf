@@ -47,12 +47,25 @@ void		ft_ispacing(char c, t_printf *f, int length)
 {
 	int		lensp;
 
-	if ((lensp = f->width - length) > 0)
-		while (lensp > 0)
-		{
-			ft_putchar(c);
-			lensp--;
-		}
+	if (f->precis < f->width)
+	{
+		if ((lensp = f->width - length) > 0)
+			while (lensp > 0)
+			{
+				ft_putchar(c);
+				lensp--;
+			}
+	}
+	else
+	{
+		if ((lensp = f->precis - (length - 1)) > 0) //width = (length of num + sign) -- on other side precision = (length of precision without sign)
+			while (lensp > 0) // cause > 0 lensp don't go to 0
+			{
+				ft_putchar(c);
+				lensp--;
+			}
+	}
+	
 }
 
 unsigned long long	ft_get_unum_modlen(t_printf *f)

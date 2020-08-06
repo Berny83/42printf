@@ -15,7 +15,7 @@
 int				main(void)
 {
 	// int i = 7;
-	int n = -32760;
+	int n = -3276;
 	// unsigned long long ui = 4294967295;
 	// unsigned long int oi = 8;
 	// unsigned int xi = 963;
@@ -24,15 +24,15 @@ int				main(void)
 	// int *p = &n;
 	// printf("%-90p\n", p); //address
 	// ft_printf("%-90p\n", p); //address
-	printf("%+010i\n", n); //int
-	ft_printf("%+010i\n", n); //int
-	// printf("%010.1i\n", n); //int
-	// ft_printf("%010.1i\n", n); //int
+	// printf("%+010.1i\n", n); //int
+	// ft_printf("%+010.1i\n", n); //int
+	printf("printf = %.10i\n", n); //int
+	ft_printf("ft_printf = %.10i\n", n); //int
 	// printf("precision without width = %.30i\n", n); //int
 	// printf("just dot = %.i\n", n); //int
 	// ft_printf("%10.2i\n", n); //int
-	// printf("%30llu\n", ui); // unsigned int
-	// ft_printf("%30llu\n", ui); // unsigned int
+	// printf("%30.30llu\n", ui); // unsigned int
+	// ft_printf("%30.30llu\n", ui); // unsigned int
 	// printf("%010lo\n", oi); // unsigned octal int
 	// ft_printf("%010lo\n", oi); // unsigned octal int
 	// printf("%#10X\n", xi); // unsigned hex int

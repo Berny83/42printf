@@ -90,7 +90,7 @@ void		ft_get_all_flags(t_printf *f)
 {
 	f->i++;
 	get_flags_hzmps(f);
-	printf("str->flags = \"%c%c%c%c%c\"\n", f->fh, f->fz, f->fm, f->fp, f->fs);
+	// printf("str->flags = \"%c%c%c%c%c\"\n", f->fh, f->fz, f->fm, f->fp, f->fs);
 	// printf("str->fh = \"%c\"\n", f->fh);
 	// printf("str->fz = \"%c\"\n", f->fz);
 	// printf("str->fm = \"%c\"\n", f->fm);
@@ -98,10 +98,10 @@ void		ft_get_all_flags(t_printf *f)
 	// printf("str->fs = \"%c\"\n", f->fs);
 	// printf("i = %i\n", str->i);
 	get_width(f);
-	printf("fieldwidth = %li\n", f->width);
+	// printf("fieldwidth = %li\n", f->width);
 	if (f->cpy[f->i] == '.')
 		get_precision(f);
-	printf("precision = %li\n", f->precis);
+	// printf("precision = %li\n", f->precis);
 	get_mod_length(f);
 	// printf("str->mod_len = \"%s\"\n", f->modln);
 	get_conversion(f);
