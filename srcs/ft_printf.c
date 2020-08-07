@@ -86,7 +86,7 @@ t_printf		*ft_reset_init(t_printf *f)
 	return(f);
 }
 
-void		ft_get_all_flags(t_printf *f)
+void			ft_get_all_flags(t_printf *f)
 {
 	f->i++;
 	get_flags_hzmps(f);

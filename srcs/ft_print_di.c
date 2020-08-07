@@ -44,29 +44,59 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 {
 	if (f->fz || (f->precis >= f->width))
 	{
-		(f->precis < f->width) ? ft_ispacing(' ', f, (length + 1)) : 0;
-		if (res >= 0 && (f->fp || f->fs))
-			(f->fp) ? ft_putchar('+') : ft_putchar(' ');
-		else
-			(res < 0) ? ft_putchar('-') : ft_putchar('0');
+		if (f->fz && res < 0)
+			ft_putchar('-');
+		else if (f->fz && res > 0)
+		{
+			ft_putchar('0');
+			f->len++;
+		}
+		(f->precis < f->width) ? ft_ispacing('0', f, (length + 1)) : 0;
+		if ((res >= 0 && (f->fp || f->fs)) || res < 0)
+		{
+			(f->fp && res > 0) ? ft_putchar('+') : 0;
+			(f->fs && res > 0) ? ft_putchar('0') : 0;
+			(res < 0 && !f->fz) ? ft_putchar('-') : 0;
+			f->len++;
+		}
 		(f->precis >= f->width) ? ft_ispacing('0', f, (length + 1)) : 0;
 	}
 	else
 	{
-		ft_ispacing(' ', f, (length + 1));
-		if (res >= 0 && (f->fs || f->fp))
-			(f->fp) ? ft_putchar('+') : ft_putchar(' ');
-		else
-			(res < 0) ? ft_putchar('-') : ft_putchar(' ');
+		if (f->precis <= length)
+		{
+			(res < 0 || f->fp) ? ft_ispacing(' ', f, length + 1) : ft_ispacing(' ', f, length);
+			if (res < 0 || f->fp)
+			{
+				(res > 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
+				f->len++;
+			}
+		}
+		else if (f->precis < f->width)
+		{
+			(res < 0 || f->fp) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
+			if (res < 0 || f->fp)
+			{
+				(res > 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
+				f->len++;
+			}
+			ft_ispacing('0', f, (f->width - f->precis + length));
+		}
 	}
 }
 
 static void print_flags_without_width(t_printf *f, long long res, int length)
 {
 	if (res < 0)
+	{
 		ft_putchar('-');
+		f->len++;
+	}
 	if (res >= 0 && (f->fp || f->fs))
+	{
 		(f->fp) ? ft_putchar('+') : ft_putchar(' ');
+		f->len++;
+	}
 	if (f->precis >= f->width)
 		ft_ispacing('0', f, (length + 1));
 	else
@@ -91,12 +121,12 @@ void			ft_print_int(t_printf *f)
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		if (f->precis < f->width)
-			{
-				if (res >= 0)
-					(f->precis > length) ? ft_ispacing(' ', f, f->precis) : ft_ispacing(' ', f, length);
-				else
-					(f->precis > length) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, length + 1);
-			}
-			
+		{
+			if (f->precis > length)
+				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
+			else
+				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, length + 1) : ft_ispacing(' ', f, length);
+		}
+	f->len += length;
 }
 //не обработан 0 (?) и maxmin hh, h, l, ll

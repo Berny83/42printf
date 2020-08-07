@@ -21,8 +21,7 @@ void		ft_print_all(t_printf *f)
 	(f->convs == 'u') ? ft_print_uint(f) : 0;
 	(f->convs == 'o') ? ft_print_oint(f) : 0;
 	(f->convs == 'x' || f->convs == 'X') ? ft_print_xint(f) : 0;
-	(f->convs == '%') ? ft_putchar('%') : 0;
-
+	(f->convs == '%') ? ft_putchar('%') : 0; // write new funstion for this flag ???
 }
 
 void		ft_print_str(t_printf *f)
@@ -43,7 +42,7 @@ void		ft_print_str(t_printf *f)
 	ft_putstr(res);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
-	free(res);
+	f->len += length;
 }
 
 void		ft_print_char(t_printf *f)
@@ -67,6 +66,7 @@ void		ft_print_char(t_printf *f)
 	ft_putchar(res);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
+	f->len += length;
 }
 
 void					ft_print_address(t_printf *f)
@@ -89,6 +89,7 @@ void					ft_print_address(t_printf *f)
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
+	f->len += length;
 }
 
 void		ft_spacing(char c, t_printf *f, int length)
@@ -99,6 +100,7 @@ void		ft_spacing(char c, t_printf *f, int length)
 		while (lensp > 0)
 		{
 			ft_putchar(c);
+			f->len++;
 			lensp--;
 		}
 }

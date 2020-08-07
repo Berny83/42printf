@@ -40,6 +40,8 @@ void		ft_errors(int i)
 		ft_putendl("You can't use this flag with %u.");
 	else if (i == 13)
 		ft_putendl("You can't use this flag with %o.");
+	else if (i == 14)
+		ft_putendl("'0' flag ignored with precision and %u, %o, %xX gnu_printf format.");
 	exit(0);
 }
 
@@ -53,6 +55,7 @@ void		ft_ispacing(char c, t_printf *f, int length)
 			while (lensp > 0)
 			{
 				ft_putchar(c);
+				f->len++;
 				lensp--;
 			}
 	}
@@ -62,10 +65,10 @@ void		ft_ispacing(char c, t_printf *f, int length)
 			while (lensp > 0) // cause > 0 lensp don't go to 0
 			{
 				ft_putchar(c);
+				f->len++;
 				lensp--;
 			}
 	}
-	
 }
 
 unsigned long long	ft_get_unum_modlen(t_printf *f)

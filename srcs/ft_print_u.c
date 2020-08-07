@@ -25,27 +25,49 @@ static unsigned int		ft_get_len_uint(unsigned long long res)
 	return(len);
 }
 
-//18446744073709551615 - max unsigned long long
-//ft_putunbr(res); -- error with the max unsigned long long
+static void check_uint_error_flags(t_printf *f)
+{
+	if (f->fh || f->fp || f->fs)
+		ft_errors(12);
+	if (f->fm && f->fz)
+		ft_errors(10);
+	if (f->fz && (f->precis >= 0))
+		ft_errors(14);
+}
+
+static void print_flags_width(t_printf *f, int length)
+{
+	if (f->fz || (f->precis >= f->width))
+		(f->fz) ? ft_ispacing('0', f, length) : ft_ispacing('0', f, length + 1);
+	else if (!f->fz && (f->precis <= length))
+		ft_ispacing(' ', f, length);
+	else if (!f->fz && (f->precis < f->width))
+	{
+		ft_ispacing(' ', f, f->precis);
+		ft_ispacing('0', f, (f->width - f->precis + length));
+	}
+}
+
 void					ft_print_uint(t_printf *f)
 {
 	unsigned long long	res;
 	unsigned int		length;
 
-	if (f->fh || f->fp || f->fs)
-		ft_errors(12);
-	if (f->fm && f->fz)
-		ft_errors(10);
+	check_uint_error_flags(f);
 	res = ft_get_unum_modlen(f);
 	length = ft_get_len_uint(res);
-	if (f->width > 0 && !f->fm)
-	{
-		if (f->fz)
-			ft_spacing('0', f, length);
-		else
-			ft_spacing(' ', f, length);
-	}
+	if (f->width >= 0 && !f->fm)
+		print_flags_width(f, length);
+	if (f->width > 0 && f->fm)
+		(f->precis < f->width) ? ft_ispacing('0', f, (f->width - f->precis + length)) :\
+		 ft_ispacing('0', f, length + 1);
 	ft_putunbr(res);
 	if (f->width > 0 && f->fm)
-		ft_spacing(' ', f, length);
+	{		
+		if (f->precis <= length)
+			ft_ispacing(' ', f, length);
+		else if (f->precis < f->width)
+			ft_ispacing(' ', f, f->precis);
+	}
+	f->len += length;
 }

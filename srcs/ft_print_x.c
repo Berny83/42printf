@@ -12,20 +12,64 @@
 
 #include "ft_printf.h"
 
-static void x_print_flags_with_width(t_printf *f, int length)
+static void x_print_flags_with_widthfm(t_printf *f, int length)
 {
-	if (f->fz)
+	if (f->fz || (f->precis >= f->width && f->width != 0))
 	{
 		ft_putchar('0');
 		(f->fh) ? ft_putchar(f->convs) : ft_putchar('0');
-		ft_spacing('0', f, (length + 2));
+		if (f->precis >= f->width)
+		{
+			(f->fh) ? ft_putstr("00") : 0;
+			ft_ispacing('0', f, (length + 3));
+		}
+		else
+			ft_ispacing('0', f, (length + 2));
 	}
-	else
+	else if (f->precis <= length)
 	{
-		ft_spacing(' ', f, (length + 2));
-		(f->fh) ? ft_putchar('0') : ft_putchar(' ');
-		(f->fh) ? ft_putchar(f->convs) : ft_putchar(' ');
+		(f->fh) ? ft_ispacing(' ', f, (length + 2)) : ft_ispacing(' ', f, length);
+		(f->fh) ? ft_putchar('0') : 0;
+		(f->fh) ? ft_putchar(f->convs) : 0;
 	}
+	else if (f->precis < f->width)
+	{
+		(f->fh) ? ft_ispacing(' ', f, f->precis + 2) : ft_ispacing(' ', f, f->precis);
+		(f->fh) ? ft_putchar('0') : 0;
+		(f->fh) ? ft_putchar(f->convs) : 0;
+		ft_ispacing('0', f, (f->width - f->precis + length));
+	}
+}
+
+static void				x_print_flags_with_fm(t_printf *f, int length)
+{
+	if (f->precis >= f->width)
+	{
+		(f->fh) ? ft_putchar('0') : 0;
+		(f->fh) ? ft_putchar(f->convs) : 0;
+		ft_ispacing('0', f, length + 1);
+	}
+	else if (f->precis <= length)
+	{
+		(f->fh) ? ft_putchar('0') : 0;
+		(f->fh) ? ft_putchar(f->convs) : 0;
+	}
+	else if (f->precis < f->width)
+	{	
+		(f->fh) ? ft_putchar('0') : 0;
+		(f->fh) ? ft_putchar(f->convs) : 0;
+		ft_ispacing('0', f, (f->width - f->precis + length));
+	}
+}
+
+static void check_xint_error_flags(t_printf *f)
+{
+	if (f->fs || f->fp)
+		ft_errors(13);
+	if (f->fm && f->fz)
+		ft_errors(10);
+	if (f->fz && f->precis >= 0)
+		ft_errors(14);
 }
 
 void					ft_print_xint(t_printf *f)
@@ -34,22 +78,21 @@ void					ft_print_xint(t_printf *f)
 	unsigned int		length;
 	char				*s;
 
-	if (f->fs || f->fp)
-		ft_errors(13);
-	if (f->fm && f->fz)
-		ft_errors(10);
+	check_xint_error_flags(f);
 	res = ft_get_unum_modlen(f);
 	s = (f->convs == 'x') ? ft_itoa_base_ull(res, 16, 'a') : \
 	ft_itoa_base_ull(res, 16, 'A');
 	length = ft_strlen(s);
-	if (f->width > 0 && !f->fm)
-		x_print_flags_with_width(f, length);
-	if (f->fh && f->width >= 0 && f->fm)
-	{
-		ft_putchar('0');
-		ft_putchar(f->convs);
-	}
+	if (f->width >= 0 && !f->fm)
+		x_print_flags_with_widthfm(f, length);
+	if (f->width >= 0 && f->fm)
+		x_print_flags_with_fm(f, length);
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
-		(f->fh) ? ft_spacing(' ', f, (length + 2)) : ft_spacing(' ', f, length);
+	{
+		if (f->precis <= length)
+			(f->fh) ? ft_ispacing(' ', f, (length + 2)) : ft_ispacing(' ', f, length);
+		else if (f->precis < f->width)
+			(f->fh) ? ft_ispacing(' ', f, f->precis + 2): ft_ispacing(' ', f, f->precis);
+	}
 }
