@@ -12,29 +12,13 @@
 
 NAME = ft_printf
 
-LIBFT = lib/
+LIBFT = libftprintf/
 CC = gcc
 FLAGS = -Wall -Wextra -Werror -O3
-LFLAGS = -L $(LIBFT) -lft
+LFLAGS = -L $(LIBFT) -lftprintf
 
-SRCS = ft_printf.c \
-		ft_get_flags.c \
-		ft_support.c \
-		ft_print_scp.c \
-		ft_print_di.c \
-		ft_print_u.c \
-		ft_print_o.c \
-		ft_print_x.c \
-		main.c
-SRC_DIR = srcs/
-SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
-
-OBJDIR = obj/
-OBJ_P = $(addprefix $(OBJDIR),$(SRCS:.c=.o))
-
-HEADERS = ft_printf.h
-HEAD_DIR = includes/
-HEAD_P = $(addprefix $(HEAD_DIR),$(HEADERS))
+SRCS = main.c
+HEADER = libftprintf/includes/
 
 # COLOR
 GREEN = \033[0;32m
@@ -43,25 +27,17 @@ BASE = \033[0m
 
 .PHONY: all, clean, fclean, re
 
-all: libft.a $(NAME)
+all: libftprintf.a $(NAME)
 
-$(NAME): $(OBJ_P) $(HEAD_P)
-	$(CC) $(FLAGS) $(OBJ_P) $(LFLAGS) -o $(NAME)
+$(NAME):
+	$(CC) $(FLAGS) $(SRCS) -I $(HEADER) $(LFLAGS) -o $(NAME)
 
-$(OBJDIR)%.o: $(SRC_DIR)%.c $(HEAD_P)
-	mkdir -p $(OBJDIR)
-	@$(CC) $(FLAGS) -I $(LIBFT) -I $(HEAD_DIR) -o $@ -c $<
-
-libft.a:
+libftprintf.a:
 	@make -C $(LIBFT)
-	@echo "$(GREEN) libft.a was compiled$(BASE)"
-
-ex:
-	gcc $(FLAGS) ex_printf.c -o example.out
+	@echo "$(GREEN) libftprintf.a was compiled$(BASE)"
 
 clean:
 	@make -C $(LIBFT) clean
-	rm -rf $(OBJDIR)
 	@echo "$(GREEN) obj-files were deleted$(BASE)"
 
 fclean: clean
