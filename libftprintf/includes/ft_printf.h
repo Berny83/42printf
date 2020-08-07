@@ -79,6 +79,7 @@ void		ft_print_int(t_printf *f);
 void		ft_print_uint(t_printf *f);
 void		ft_print_oint(t_printf *f);
 void		ft_print_xint(t_printf *f);
+void		ft_print_percent(t_printf *f);
 
 //--------------- support functions ---------------------
 

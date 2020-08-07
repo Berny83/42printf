@@ -40,9 +40,12 @@ int				main(void)
 	// printf("Resident Evil %i %c %%\n", 7, 'C');
 	// ft_printf("Hooray %5d\n", 8);
 
+	printf("pp =%10.10%\n");
+	ft_printf("fp =%-5%\n");
+
 	//---------------кол-чо напечатанных символов------------
-	int lenpp = 0;
-	int lenfp = 0;
+	// int lenpp = 0;
+	// int lenfp = 0;
 	// char c = 'a';
 
 	// lenpp = printf("pp =%-+10.7i\n", i); //int
@@ -57,11 +60,11 @@ int				main(void)
 	// lenfp = ft_printf("fp =%-20.3llu\n", ui); // unsigned int
 	// lenpp = printf("pp =%#0lo\n", oi); // octal int
 	// lenfp = ft_printf("fp =%#0lo\n", oi); // octal int
-	lenpp = printf("pp =%-x\n", xi); // hex int
-	lenfp = ft_printf("fp =%-x\n", xi); // hex int
+	// lenpp = printf("pp =%-x\n", xi); // hex int
+	// lenfp = ft_printf("fp =%-x\n", xi); // hex int
 
-	printf("lenpp = %i\n", lenpp);
-	printf("lenfp = %i\n", lenfp);
+	// printf("lenpp = %i\n", lenpp);
+	// printf("lenfp = %i\n", lenfp);
 
 	return (0);
 }
