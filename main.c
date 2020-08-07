@@ -18,7 +18,7 @@ int				main(void)
 	// int n = -3276;
 	// unsigned long long ui = 4294967295;
 	// unsigned long int oi = 800;
-	unsigned int xi = 963;
+	// unsigned int xi = 963;
 	// char str[] = "RobertoO";
 	// char s[] = "Resident Evil 7";
 	// int *p = &n;
@@ -40,12 +40,9 @@ int				main(void)
 	// printf("Resident Evil %i %c %%\n", 7, 'C');
 	// ft_printf("Hooray %5d\n", 8);
 
-	printf("pp =%10.10%\n");
-	ft_printf("fp =%-5%\n");
-
 	//---------------кол-чо напечатанных символов------------
-	// int lenpp = 0;
-	// int lenfp = 0;
+	int lenpp = 0;
+	int lenfp = 0;
 	// char c = 'a';
 
 	// lenpp = printf("pp =%-+10.7i\n", i); //int
@@ -63,8 +60,11 @@ int				main(void)
 	// lenpp = printf("pp =%-x\n", xi); // hex int
 	// lenfp = ft_printf("fp =%-x\n", xi); // hex int
 
-	// printf("lenpp = %i\n", lenpp);
-	// printf("lenfp = %i\n", lenfp);
+	lenpp = printf("pp =%05o\n", 42);
+	lenfp = ft_printf("fp =%05o\n", 42);
+
+	printf("lenpp = %i\n", lenpp);
+	printf("lenfp = %i\n", lenfp);
 
 	return (0);
 }

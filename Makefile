@@ -19,6 +19,7 @@ LFLAGS = -L $(LIBFT) -lftprintf
 
 SRCS = main.c
 HEADER = libftprintf/includes/
+OBJECTS = $(SRCS:%.c=%.o)
 
 # COLOR
 GREEN = \033[0;32m
@@ -29,8 +30,11 @@ BASE = \033[0m
 
 all: libftprintf.a $(NAME)
 
-$(NAME):
-	$(CC) $(FLAGS) $(SRCS) -I $(HEADER) $(LFLAGS) -o $(NAME)
+$(NAME): libftprintf.a $(OBJECTS)
+	@$(CC) $(FLAGS) -I $(HEADER) $(OBJECTS) $(LFLAGS) -o $(NAME)
+
+%.o: %.c
+	@$(CC) $(FLAGS) -I $(HEADER) -I $(LIBFT) -o $@ -c $<
 
 libftprintf.a:
 	@make -C $(LIBFT)
@@ -38,6 +42,7 @@ libftprintf.a:
 
 clean:
 	@make -C $(LIBFT) clean
+	@rm -rf main.o
 	@echo "$(GREEN) obj-files were deleted$(BASE)"
 
 fclean: clean

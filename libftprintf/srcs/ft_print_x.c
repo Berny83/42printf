@@ -16,14 +16,13 @@ static void x_print_flags_with_widthfm(t_printf *f, int length)
 {
 	if (f->fz)
 	{
-		(f->fz) ? ft_ispacing('0', f, length) : ft_ispacing('0', f, length + 1);
 		if (f->fh)
 		{
 			ft_putchar('0');
 			ft_putchar(f->convs);
 			f->len += 2;
 		}
-		ft_ispacing('0', f, (length + 1));
+		(f->fh) ? ft_ispacing('0', f, length + 2) : ft_ispacing('0', f, length);
 	}
 	else if (!f->fz && (f->precis >= f->width))
 	{
