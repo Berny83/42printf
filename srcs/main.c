@@ -17,8 +17,8 @@ int				main(void)
 	// int i = 700;
 	// int n = -3276;
 	// unsigned long long ui = 4294967295;
-	unsigned long int oi = 800;
-	// unsigned int xi = 963;
+	// unsigned long int oi = 800;
+	unsigned int xi = 963;
 	// char str[] = "RobertoO";
 	// char s[] = "Resident Evil 7";
 	// int *p = &n;
@@ -55,8 +55,10 @@ int				main(void)
 	// lenfp = ft_printf("fp = %90c\n", c); //address
 	// lenpp = printf("pp =%-20.3llu\n", ui); // unsigned int
 	// lenfp = ft_printf("fp =%-20.3llu\n", ui); // unsigned int
-	lenpp = printf("pp =%10lo\n", oi); // octal int
-	lenfp = ft_printf("fp =%10lo\n", oi); // octal int
+	// lenpp = printf("pp =%#0lo\n", oi); // octal int
+	// lenfp = ft_printf("fp =%#0lo\n", oi); // octal int
+	lenpp = printf("pp =%-x\n", xi); // hex int
+	lenfp = ft_printf("fp =%-x\n", xi); // hex int
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
