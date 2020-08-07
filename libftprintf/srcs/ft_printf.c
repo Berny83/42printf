@@ -107,5 +107,6 @@ void			ft_get_all_flags(t_printf *f)
 	get_conversion(f);
 	// printf("str->convs = %c\n", f->convs);
 	// printf("i = %i\n", f->i);
-	ft_print_all(f);
+	if (f->convs)
+		ft_print_all(f);
 }

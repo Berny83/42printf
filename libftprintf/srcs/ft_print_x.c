@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void x_print_flags_with_widthfm(t_printf *f, int length)
+static void x_print_flags_with_widthfm(t_printf *f, int length, char zero)
 {
 	if (f->fz)
 	{
@@ -36,8 +36,8 @@ static void x_print_flags_with_widthfm(t_printf *f, int length)
 	}
 	else if (f->precis <= length)
 	{
-		(f->fh) ? ft_ispacing(' ', f, (length + 2)): ft_ispacing(' ', f, length);
-		if (f->fh)
+		(f->fh && zero != '1') ? ft_ispacing(' ', f, (length + 2)): ft_ispacing(' ', f, length);
+		if (f->fh && zero != '1')
 		{
 			ft_putchar('0');
 			ft_putchar(f->convs);
@@ -105,14 +105,18 @@ void					ft_print_xint(t_printf *f)
 	unsigned long long	res;
 	unsigned int		length;
 	char				*s;
+	char				zero;
 
+	zero = '0';
 	check_xint_error_flags(f);
 	res = ft_get_unum_modlen(f);
 	s = (f->convs == 'x') ? ft_itoa_base_ull(res, 16, 'a') : \
 	ft_itoa_base_ull(res, 16, 'A');
+	if (!ft_strcmp(s, "0"))
+		zero = '1';
 	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
-		x_print_flags_with_widthfm(f, length);
+		x_print_flags_with_widthfm(f, length, zero);
 	if (f->width >= 0 && f->fm)
 		x_print_flags_with_fm(f, length);
 	ft_putstr(s);

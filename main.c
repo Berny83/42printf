@@ -60,8 +60,8 @@ int				main(void)
 	// lenpp = printf("pp =%-x\n", xi); // hex int
 	// lenfp = ft_printf("fp =%-x\n", xi); // hex int
 
-	lenpp = printf("pp =%05o\n", 42);
-	lenfp = ft_printf("fp =%05o\n", 42);
+	lenpp = printf("pp =%#o\n", 0);
+	lenfp = ft_printf("fp =%#o\n", 0);
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);

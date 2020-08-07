@@ -12,7 +12,7 @@
 
 #include "ft_printf.h"
 
-static void				o_print_flags_without_fm(t_printf *f, int length)
+static void				o_print_flags_without_fm(t_printf *f, int length, char zero)
 {
 	if (f->fz)
 	{
@@ -34,8 +34,8 @@ static void				o_print_flags_without_fm(t_printf *f, int length)
 		}
 	else if (f->precis <= length)
 	{
-		(f->fh) ? ft_ispacing(' ', f, (length + 1)): ft_ispacing(' ', f, length);
-		if (f->fh)
+		(f->fh && zero != '1') ? ft_ispacing(' ', f, (length + 1)): ft_ispacing(' ', f, length);
+		if (f->fh && zero != '1')
 		{
 			ft_putchar('0');
 			f->len++;
@@ -83,13 +83,17 @@ void					ft_print_oint(t_printf *f)
 	unsigned long long	res;
 	unsigned int		length;
 	char				*s;
+	char				zero;
 
+	zero = '0';
 	check_oint_error_flags(f);
 	res = ft_get_unum_modlen(f);
 	s = ft_itoa_base_ull(res, 8, 'a');
 	length = ft_strlen(s);
+	if (!ft_strcmp(s, "0"))
+		zero = '1';
 	if (f->width >= 0 && !f->fm)
-		o_print_flags_without_fm(f, length);
+		o_print_flags_without_fm(f, length, zero);
 	if (f->width >= 0 && f->fm)
 		o_print_flags_with_fm(f, length);
 	ft_putstr(s);
