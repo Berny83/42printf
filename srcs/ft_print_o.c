@@ -14,16 +14,10 @@
 
 static void				o_print_flags_without_fm(t_printf *f, int length)
 {
-	if (f->fz || (f->precis >= f->width))
-	{
+	if (f->fz)
 		(f->fz) ? ft_ispacing('0', f, length) : ft_ispacing('0', f, length + 1);
-		// if (f->fh || (f->fz && f->width > length))
-		// {
-		// 	ft_putchar('0');
-		// 	f->len++;
-		// }
-		// (f->fh) ? ft_ispacing('0', f, length + 2) : ft_ispacing('0', f, length + 1);
-	}
+	else if (!f->fz && (f->precis >= f->width))
+		ft_ispacing('0', f, (length + 1));
 	else if (f->precis <= length)
 	{
 		ft_ispacing(' ', f, (length + 1));

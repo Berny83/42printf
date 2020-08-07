@@ -55,8 +55,8 @@ int				main(void)
 	// lenfp = ft_printf("fp = %90c\n", c); //address
 	// lenpp = printf("pp =%-20.3llu\n", ui); // unsigned int
 	// lenfp = ft_printf("fp =%-20.3llu\n", ui); // unsigned int
-	lenpp = printf("pp =%010lo\n", oi); // octal int
-	lenfp = ft_printf("fp =%010lo\n", oi); // octal int
+	lenpp = printf("pp =%10lo\n", oi); // octal int
+	lenfp = ft_printf("fp =%10lo\n", oi); // octal int
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
