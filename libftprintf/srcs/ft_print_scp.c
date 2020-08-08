@@ -101,7 +101,7 @@ void		ft_print_percent(t_printf *f)
 
 	length = 1;
 	if (f->width > 0 && !f->fm)
-		ft_spacing(' ', f, 1);
+		(f->fz) ? ft_spacing('0', f, 1) : ft_spacing(' ', f, 1);
 	ft_putchar('%');
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, 1);

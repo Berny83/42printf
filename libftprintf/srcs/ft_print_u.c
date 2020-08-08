@@ -12,33 +12,33 @@
 
 #include "ft_printf.h"
 
-static unsigned int		ft_get_len_uint(unsigned long long res)
-{
-	unsigned int		len;
-
-	len = (res == 0) ? 1 : 0;
-	while (res)
-	{
-		len++;
-		res /= 10;
-	}
-	return(len);
-}
-
 static void check_uint_error_flags(t_printf *f)
 {
 	if (f->fh)
 		ft_errors(12);
-	if (f->fz && (f->precis >= 0))
-		ft_errors(14);
 }
 
-static void print_flags_width(t_printf *f, int length)
+static void print_flags_width(t_printf *f, int length, char zero)
 {
 	if (f->fz || (f->precis >= f->width))
-		(f->fz) ? ft_ispacing('0', f, length) : ft_ispacing('0', f, length + 1);
+	{
+		if (f->fz && f->precis < 0)
+			ft_ispacing('0', f, length);
+		else
+		{
+			if (f->precis < length)
+				ft_ispacing(' ', f, length);
+			else if (f->precis < f->width)
+			{
+				ft_ispacing(' ', f, f->precis);
+				ft_ispacing('0', f, (f->width - f->precis + length));
+			}
+			else
+				ft_ispacing('0', f, length + 1);
+		}
+	}
 	else if (!f->fz && (f->precis <= length))
-		ft_ispacing(' ', f, length);
+		(zero != '1') ? ft_ispacing(' ', f, length) : ft_ispacing(' ', f, 0);
 	else if (!f->fz && (f->precis < f->width))
 	{
 		ft_ispacing(' ', f, f->precis);
@@ -50,16 +50,23 @@ void					ft_print_uint(t_printf *f)
 {
 	unsigned long long	res;
 	unsigned int		length;
+	char				*s;
+	char				zero;
 
+	zero = '0';
 	check_uint_error_flags(f);
-	res = ft_get_unum_modlen(f);
-	length = ft_get_len_uint(res);
+	if (!(res = ft_get_unum_modlen(f)))
+		zero = '1';
+	s = ft_itoa_base_ull(res, 10, 'a');
+	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
-		print_flags_width(f, length);
+		print_flags_width(f, length, zero);
 	if (f->width > 0 && f->fm)
+	{
 		(f->precis < f->width) ? ft_ispacing('0', f, (f->width - f->precis + length)) :\
 		 ft_ispacing('0', f, length + 1);
-	ft_putunbr(res);
+	}
+	(f->precis == 0 && zero == '1' && !f->fh) ? 0 : ft_putstr(s);
 	if (f->width > 0 && f->fm)
 	{		
 		if (f->precis <= length)
@@ -67,5 +74,5 @@ void					ft_print_uint(t_printf *f)
 		else if (f->precis < f->width)
 			ft_ispacing(' ', f, f->precis);
 	}
-	f->len += length;
+	(f->precis == 0 && zero == '1' && !f->fh) ? (f->len += 0) : (f->len += length);
 }

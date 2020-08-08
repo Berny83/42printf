@@ -57,6 +57,7 @@ char		*ft_itoa_base_address16(unsigned long num)
 		str[len] = fill_string(prod);
 		len--;
 	}
+	(num == 0) ? str[len] = '0' : 0;
 	str[1] = 'x';
 	str[0] = '0';
 	return(str);

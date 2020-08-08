@@ -17,8 +17,6 @@ static char				fill_string(long long prod)
 	char				c;
 
 	c = '0';
-	// if (prod > 36)
-	// 	return (0);
 	if (prod < 10)
 		c = prod + '0';
 	else if (prod >= 10)

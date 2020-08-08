@@ -59,8 +59,11 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 			}
 			else if (!f->fp && !f->fs)
 			{
-				ft_putchar('0');
-				f->len++;
+				if (length != f->width)
+					{
+						ft_putchar('0');
+						f->len++;
+					}
 			}
 		}
 		ft_ispacing('0', f, (length + 1));
@@ -163,7 +166,14 @@ void			ft_print_int(t_printf *f)
 			if (f->precis > length)
 				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
 			else
-				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, length + 1) : ft_ispacing(' ', f, length);
+			{
+				if (f->fp || f->fs || res < 0)
+					ft_ispacing(' ', f, length + 1);
+				else if (res == 0 && f->precis >= 0)
+					ft_ispacing(' ', f, 0);
+				else
+					ft_ispacing(' ', f, length);
+			}
 		}
 	(f->precis == 0 && zero == '1') ? (f->len += 0) : (f->len += length);
 }

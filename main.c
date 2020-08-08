@@ -69,8 +69,8 @@ int				main(void)
 	// int n = printf("%Z\n");
 	// double ff = 154.23;
 
-	lenpp = printf("pp =%f\n", 7.0);
-	lenfp = ft_printf("fp =%f\n", 7.0);
+	lenpp = printf("pp =%3u\n", 0);
+	lenfp = ft_printf("fp =%3u\n", 0);
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
