@@ -39,12 +39,14 @@ t_printf		*ft_init(const char *format)
 	new->cpy = format;
 	new->width = 0;
 	new->precis = -1;
+	new->f_prec = 6;
 	new->fh = '\0';
 	new->fz = '\0';
 	new->fm = '\0';
 	new->fp = '\0';
 	new->fs = '\0';
 	new->sign = 1;
+	new->lfloat = 0;
 	new->modln = ft_strnew(2);
 	new->convs = '\0';
 	new->len = 0;
@@ -70,6 +72,7 @@ int			ft_parse_format(t_printf *f)
 		}
 		f->i++;
 	}
+	// printf("cputttt = %i\n", f->len);
 	return(f->len);
 }
 
@@ -77,12 +80,14 @@ t_printf		*ft_reset_init(t_printf *f)
 {
 	f->width = 0;
 	f->precis = -1;
+	f->f_prec = 6;
 	f->fh = '\0';
 	f->fz = '\0';
 	f->fm = '\0';
 	f->fp = '\0';
 	f->fs = '\0';
 	f->sign = 1;
+	f->lfloat = 0;
 	f->modln = ft_memset(f->modln, '\0', 2);
 	f->convs = '\0';
 	
@@ -111,7 +116,10 @@ int				ft_get_all_flags(t_printf *f)
 	// printf("str->convs = %c\n", f->convs);
 	// printf("i = %i\n", f->i);
 	if (f->convs)
+	{
 		ft_print_all(f);
+		// printf("get_all_flags= %i\n", f->len);
+	}
 	else
 		return(0);
 	return(1);

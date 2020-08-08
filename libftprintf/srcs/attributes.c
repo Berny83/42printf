@@ -6,7 +6,7 @@
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:35:25 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 15:59:38 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:25:29 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void			fill_width(t_buf *buf, t_printf *get)
 	char	val;
 
 	i = 0;
-	n = get->width - get->precis - 1;
+	n = get->width - get->f_prec - 1;
 	if (!get->fp && get->fs && get->sign > 0 && i < n)
-		n = get->width - get->precis - 2;
+		n = get->width - get->f_prec - 2;
 	val = -16;
 	if (get->fz)
 		val = 0;

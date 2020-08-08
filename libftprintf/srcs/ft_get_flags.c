@@ -65,10 +65,13 @@ t_printf	*get_precision(t_printf *f)
 {
 	f->i++;
 	f->precis = 0;
+	f->f_prec = 0;
 	while (f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9')
 	{
 		f->precis = f->precis * 10;
 		f->precis = f->precis + (f->cpy[f->i] - '0');
+		f->f_prec = f->f_prec * 10;
+		f->f_prec = f->f_prec + (f->cpy[f->i] - '0');
 		f->i++;
 	}
 	return(f);
@@ -88,7 +91,11 @@ t_printf	*get_mod_length(t_printf *f)
 		while (lh[m.k])
 		{
 			if (lh[m.k] == f->cpy[f->i])
-				f->modln[m.j++] = f->cpy[f->i++];
+				{
+					if (f->cpy[f->i] == 'L')
+						f->lfloat = 1;
+					f->modln[m.j++] = f->cpy[f->i++];
+				}
 			m.k++;
 		}
 		m.k = 0;
@@ -99,5 +106,6 @@ t_printf	*get_mod_length(t_printf *f)
 t_printf	*get_conversion(t_printf *f)
 {
 	f->convs = *(ft_strchr(SPECIFIER, f->cpy[f->i]));
+
 	return(f);
 }

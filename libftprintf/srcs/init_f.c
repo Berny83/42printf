@@ -6,7 +6,7 @@
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:13:46 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 16:20:33 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/08 16:45:55 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,11 +57,11 @@ void			init_f(t_printf *get)
 
 	if (mem_alloc(&buf))
 	{
-		if (ft_strcmp(get->modln, "L"))
+		if (get->lfloat == 1)
 			bit_num.num = (long double)va_arg(get->avs, long double);
 		else
 			bit_num.num = (double)va_arg(get->avs, double);
-		printf("%Lf\n", bit_num.num);
+		// printf("%Lf\n", bit_num.num);
 		conversion(bit_num, &buf, get);
 		print_f(&buf, get);
 		free_buf(&buf);

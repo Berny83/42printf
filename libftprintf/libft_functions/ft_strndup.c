@@ -18,7 +18,7 @@ char		*ft_strndup(const char *str, int count)
 	int		i;
 
 	i = 0;
-	if (!str || !count)
+	if (!str)
 		return(NULL);
 	if (!(cp = (char *)malloc(sizeof(char) + count + 1)))
 		return(NULL);

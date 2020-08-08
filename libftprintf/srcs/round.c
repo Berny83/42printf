@@ -6,7 +6,7 @@
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/08 14:25:21 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 15:26:29 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:25:20 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void			ft_round(t_buf *buf, t_printf *get)
 	int j;
 
 	j = 0;
-	i = get->precis;
+	i = get->f_prec;
 	if (i == 0)
 		round_whole(buf, i);
 	else

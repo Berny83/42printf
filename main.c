@@ -67,17 +67,17 @@ int				main(void)
 	// printf("lenfp = %i\n", lenfp);
 
 	// int n = printf("%Z\n");
-	double ff = 154.23;
+	// double ff = 154.23;
 
-	lenpp = printf("pp =%f\n", ff);
-	lenfp = ft_printf("fp =%.6lf\n",ff);
+	lenpp = printf("pp =%f\n", 7.0);
+	lenfp = ft_printf("fp =%f\n", 7.0);
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
 
 	// printf("%d", n);
 	// ft_printf("% hZ%");
-	// ft_printf("\n");
+	// // ft_printf("\n");
 	// printf("% hZ%");
 
 	return (0);

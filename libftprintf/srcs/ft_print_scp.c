@@ -24,6 +24,7 @@ void		ft_print_all(t_printf *f)
 	(f->convs == 'f') ? init_f(f) : 0;
 	(f->convs == '%') ? ft_print_percent(f) : 0;
 	(f->convs == 'Z') ? ft_print_other(f) : 0;
+	// printf("flen+lengthhfhf = %i\n", f->len);
 }
 
 void		ft_print_str(t_printf *f)

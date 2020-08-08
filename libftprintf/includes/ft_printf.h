@@ -36,9 +36,11 @@ typedef struct	str_printf
 	char		fs; //space
 	long int	width;
 	long int	precis;
+	int			f_prec;
 	char		*modln; //2
 	char		convs;
 	int			sign;
+	int			lfloat;
 
 	int			len;
 	int			i;

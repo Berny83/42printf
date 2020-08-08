@@ -6,7 +6,7 @@
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/06 10:10:36 by poatmeal          #+#    #+#             */
-/*   Updated: 2020/08/08 16:00:59 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/08 17:55:27 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,19 @@ void			print_div(t_buf *buf, t_printf *get)
 	ft_putchar('.');
 	get->len++;
 	i = 0;
-	if (buf->div_num[i] == -1)
-	{
-		ft_putchar('0');
-		get->len++;
-	}
-	while (buf->div_num[i] != -1 && i < BIG_BUFF + 1 && i < get->precis)
+	// if (buf->div_num[i] == -1)
+	// {
+	// 	ft_putchar('0');
+	// 	get->len++;
+	// }
+	while (buf->div_num[i] != -1 && i < BIG_BUFF + 1 && i < get->f_prec)
 	{
 		ft_putchar(buf->div_num[i] + 48);
+		i++;
+	}
+	while (i < get->f_prec)
+	{
+		ft_putchar('0');
 		i++;
 	}
 	get->len += i;
@@ -50,9 +55,9 @@ void			print(t_buf *buf, t_printf *get)
 		get->len++;
 		i++;
 	}
-	if (get->precis != 0)
+	if (get->f_prec != 0)
 		print_div(buf, get);
-	if (get->precis == 0 && get->fh)
+	if (get->f_prec == 0 && get->fh)
 	{
 		ft_putchar('.');
 		get->len++;
@@ -65,7 +70,7 @@ void			print_align(t_buf *buf, t_printf *get)
 	int i;
 
 	i = 0;
-	n = get->width - get->precis - 1;
+	n = get->width - get->f_prec - 1;
 	while (buf->wh_num[BIG_BUFF - i] != -1)
 		i++;
 	if (i < n)
@@ -83,7 +88,7 @@ void			print_align(t_buf *buf, t_printf *get)
 
 void			print_f(t_buf *buf, t_printf *get)
 {
-	if (get->precis >= 0)
+	if (get->f_prec >= 0)
 		ft_round(buf, get);
 	if (get->fm)
 	{
