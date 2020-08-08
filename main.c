@@ -14,12 +14,12 @@
 
 int				main(void)
 {
-	// int i = 700;
+	// int i = 0;
 	// int n = -3276;
 	// unsigned long long ui = 4294967295;
-	// unsigned long int oi = 800;
-	// unsigned int xi = 963;
-	// char str[] = "RobertoO";
+	// unsigned long int oi = 0;
+	// unsigned int xi = 2500;
+	// char str[] = NULL;
 	// char s[] = "Resident Evil 7";
 	// int *p = &n;
 	// printf("%-90p\n", p); //address
@@ -45,8 +45,8 @@ int				main(void)
 	int lenfp = 0;
 	// char c = 'a';
 
-	// lenpp = printf("pp =%-+10.7i\n", i); //int
-	// lenfp = ft_printf("fp =%-+10.7i\n", i); //int
+	// lenpp = printf("pp =%i\n", i); //int
+	// lenfp = ft_printf("fp =%i\n", i); //int
 	// lenpp = printf("Resident Evil %s\n", str); //string
 	// lenfp = ft_printf("Resident Evil %s\n", str); //string
 	// lenpp = printf("pp = %-90p\n", p); //address
@@ -55,16 +55,30 @@ int				main(void)
 	// lenfp = ft_printf("fp = %90c\n", c); //address
 	// lenpp = printf("pp =%-20.3llu\n", ui); // unsigned int
 	// lenfp = ft_printf("fp =%-20.3llu\n", ui); // unsigned int
-	// lenpp = printf("pp =%#0lo\n", oi); // octal int
-	// lenfp = ft_printf("fp =%#0lo\n", oi); // octal int
+	// lenpp = printf("pp =%-5.10x\n", xi); // octal int
+	// lenfp = ft_printf("fp =%-5.10x\n", xi); // octal int
 	// lenpp = printf("pp =%-x\n", xi); // hex int
 	// lenfp = ft_printf("fp =%-x\n", xi); // hex int
 
-	lenpp = printf("pp =%#o\n", 0);
-	lenfp = ft_printf("fp =%#o\n", 0);
+	// lenpp = printf("pp =%#o\n", 0);
+	// lenfp = ft_printf("fp =%#o\n", 0);
+
+	// printf("lenpp = %i\n", lenpp);
+	// printf("lenfp = %i\n", lenfp);
+
+	// int n = printf("%Z\n");
+	double ff = 154.23;
+
+	lenpp = printf("pp =%f\n", ff);
+	lenfp = ft_printf("fp =%.6lf\n",ff);
 
 	printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
+
+	// printf("%d", n);
+	// ft_printf("% hZ%");
+	// ft_printf("\n");
+	// printf("% hZ%");
 
 	return (0);
 }

@@ -83,19 +83,15 @@ t_printf	*get_mod_length(t_printf *f)
 	m.k = 0;
 	m.l = 0;
 	lh = "lhL";
-	while (lh[m.l++]) // check, скорее всего пропускает первую l, хотя не делает этого
+	while (lh[m.l++])
 	{
-		// printf("m.l = %i\n", m.l);
 		while (lh[m.k])
 		{
 			if (lh[m.k] == f->cpy[f->i])
 				f->modln[m.j++] = f->cpy[f->i++];
-				// j++;
-				// str->i++;
 			m.k++;
 		}
 		m.k = 0;
-		// m.l++;
 	}
 	return(f);
 }

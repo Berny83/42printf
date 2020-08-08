@@ -16,7 +16,7 @@ static unsigned int		ft_get_len_uint(unsigned long long res)
 {
 	unsigned int		len;
 
-	len = 0;
+	len = (res == 0) ? 1 : 0;
 	while (res)
 	{
 		len++;
@@ -27,10 +27,8 @@ static unsigned int		ft_get_len_uint(unsigned long long res)
 
 static void check_uint_error_flags(t_printf *f)
 {
-	if (f->fh || f->fp || f->fs)
+	if (f->fh)
 		ft_errors(12);
-	// if (f->fm && f->fz)
-	// 	ft_errors(10);
 	if (f->fz && (f->precis >= 0))
 		ft_errors(14);
 }

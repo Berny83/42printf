@@ -44,6 +44,7 @@ t_printf		*ft_init(const char *format)
 	new->fm = '\0';
 	new->fp = '\0';
 	new->fs = '\0';
+	new->sign = 1;
 	new->modln = ft_strnew(2);
 	new->convs = '\0';
 	new->len = 0;
@@ -58,7 +59,8 @@ int			ft_parse_format(t_printf *f)
 	{
 		if (f->cpy[f->i] == '%')
 		{
-			ft_get_all_flags(f);
+			if (!(ft_get_all_flags(f)))
+				return (0);
 			ft_reset_init(f);
 		}
 		else
@@ -80,13 +82,14 @@ t_printf		*ft_reset_init(t_printf *f)
 	f->fm = '\0';
 	f->fp = '\0';
 	f->fs = '\0';
+	f->sign = 1;
 	f->modln = ft_memset(f->modln, '\0', 2);
 	f->convs = '\0';
 	
 	return(f);
 }
 
-void			ft_get_all_flags(t_printf *f)
+int				ft_get_all_flags(t_printf *f)
 {
 	f->i++;
 	get_flags_hzmps(f);
@@ -109,4 +112,7 @@ void			ft_get_all_flags(t_printf *f)
 	// printf("i = %i\n", f->i);
 	if (f->convs)
 		ft_print_all(f);
+	else
+		return(0);
+	return(1);
 }

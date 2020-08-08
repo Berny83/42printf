@@ -14,7 +14,7 @@ NAME = ft_printf
 
 LIBFT = libftprintf/
 CC = gcc
-FLAGS = -Wall -Wextra -Werror -O3
+FLAGS = -g -Wall -Wextra -Werror -O3
 LFLAGS = -L $(LIBFT) -lftprintf
 
 SRCS = main.c

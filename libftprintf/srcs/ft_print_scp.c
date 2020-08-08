@@ -21,7 +21,9 @@ void		ft_print_all(t_printf *f)
 	(f->convs == 'u') ? ft_print_uint(f) : 0;
 	(f->convs == 'o') ? ft_print_oint(f) : 0;
 	(f->convs == 'x' || f->convs == 'X') ? ft_print_xint(f) : 0;
+	(f->convs == 'f') ? init_f(f) : 0;
 	(f->convs == '%') ? ft_print_percent(f) : 0;
+	(f->convs == 'Z') ? ft_print_other(f) : 0;
 }
 
 void		ft_print_str(t_printf *f)
@@ -29,7 +31,9 @@ void		ft_print_str(t_printf *f)
 	char	*res;
 	int		length;
 
-	res = va_arg(f->avs, char*);
+	// res = va_arg(f->avs, char*);
+	if (!(res = va_arg(f->avs, char*)))
+		res = "(null)";
 	if (ft_strchr(f->modln, 'l') || ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L'))
 		ft_errors(2);
 	if (f->fh || f->fz || f->fp || f->fs)
@@ -56,10 +60,8 @@ void		ft_print_char(t_printf *f)
 		res = (char)va_arg(f->avs, int);
 	if (ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L') || ft_strcmp(f->modln, "ll") == 0)
 		ft_errors(4);
-	if (f->fh || f->fz || f->fp || f->fs)
+	if (f->fh || f->fz || f->fp)
 		ft_errors(3);
-	if (f->precis >= 0)
-		ft_errors(5);
 	length = 1;
 	if (f->width > 0 && !f->fm)
 		ft_spacing(' ', f, length);
@@ -94,12 +96,28 @@ void					ft_print_address(t_printf *f)
 
 void		ft_print_percent(t_printf *f)
 {
+	int		length;
+
+	length = 1;
 	if (f->width > 0 && !f->fm)
 		ft_spacing(' ', f, 1);
 	ft_putchar('%');
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, 1);
-	f->len++;
+	f->len += length;
+}
+
+void		ft_print_other(t_printf *f)
+{
+	int		length;
+
+	length = 0;
+	if (f->convs == 'Z')
+	{
+		ft_putchar('Z');
+		f->len++;
+	}
+	f->len += length;
 }
 
 void		ft_spacing(char c, t_printf *f, int length)

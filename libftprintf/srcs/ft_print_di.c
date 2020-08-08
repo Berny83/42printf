@@ -34,54 +34,81 @@ static void check_int_error_flags(t_printf *f)
 {
 	if (f->fh)
 		ft_errors(9);
-	// if (f->fz && f->fm)
-	// 	ft_errors(10);
-	// if (f->fp && f->fs)
-	// 	ft_errors(11);
 }
 
 static void print_flags_with_width(t_printf *f, long long res, int length)
 {
-	if (f->fz || (f->precis >= f->width))
+	if (f->fz && f->precis < 0)
 	{
-		if (f->fz && res < 0)
+		if (res < 0)
+		{
 			ft_putchar('-');
-		else if (f->fz && res > 0)
-		{
-			ft_putchar('0');
 			f->len++;
 		}
-		(f->precis < f->width) ? ft_ispacing('0', f, (length + 1)) : 0;
-		if ((res >= 0 && (f->fp || f->fs)) || res < 0)
+		else
 		{
-			(f->fp && res > 0) ? ft_putchar('+') : 0;
-			(f->fs && !f->fp && res > 0) ? ft_putchar(' ') : 0;
-			(res < 0 && !f->fz) ? ft_putchar('-') : 0;
-			f->len++;
+			if (f->fp)
+			{
+				ft_putchar('+');
+				f->len++;
+			}
+			else if (f->fs && !f->fp)
+			{
+				ft_putchar('+');
+				f->len++;
+			}
+			else if (!f->fp && !f->fs)
+			{
+				ft_putchar('0');
+				f->len++;
+			}
 		}
-		(f->precis >= f->width) ? ft_ispacing('0', f, (length + 1)) : 0;
+		ft_ispacing('0', f, (length + 1));
 	}
-	else
+	else if (f->precis >= f->width)
 	{
-		if (f->precis <= length)
+		if (res < 0)
 		{
-			(res < 0 || f->fp) ? ft_ispacing(' ', f, length + 1) : ft_ispacing(' ', f, length);
-			if (res < 0 || f->fp)
+			ft_putchar('-');
+			f->len++;
+		}
+		else
+		{
+			if (f->fp)
 			{
-				(res > 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
+				ft_putchar('+');
+				f->len++;
+			}
+			else if (f->fs && !f->fp)
+			{
+				ft_putchar('+');
 				f->len++;
 			}
 		}
-		else if (f->precis < f->width)
+		ft_ispacing('0', f, (length + 1));
+	}
+	else if (f->precis <= length)
+	{
+		if (res < 0 || f->fp)
 		{
-			(res < 0 || f->fp) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
-			if (res < 0 || f->fp)
-			{
-				(res > 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
-				f->len++;
-			}
-			ft_ispacing('0', f, (f->width - f->precis + length));
+			ft_ispacing(' ', f, length + 1);
+			(res >= 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
+			f->len++;
 		}
+		else if (res == 0 && f->precis == 0)
+			ft_ispacing(' ', f, 0);
+		else
+			ft_ispacing(' ', f, length);
+	}
+	else if (f->precis < f->width)
+	{
+		(res < 0 || f->fp) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
+		if (res < 0 || f->fp)
+		{
+			(res >= 0 && f->fp) ? ft_putchar('+') : ft_putchar('-');
+			f->len++;
+		}
+		ft_ispacing('0', f, (f->width - f->precis + length));
 	}
 }
 
@@ -94,7 +121,7 @@ static void print_flags_without_width(t_printf *f, long long res, int length)
 	}
 	if (res >= 0 && (f->fp || f->fs))
 	{
-		(f->fp && res > 0) ? ft_putchar('+') : 0;
+		(f->fp && res >= 0) ? ft_putchar('+') : 0;
 		(f->fs && !f->fp && res > 0) ? ft_putchar(' ') : 0;
 		f->len++;
 	}
@@ -110,16 +137,26 @@ void			ft_print_int(t_printf *f)
 	long long	res;
 	int			length;
 	char		*s;
+	char		zero;
+	unsigned long long	res_c;
 
+	zero = '0';
 	check_int_error_flags(f);
-	res = ft_get_num_modlen(f);
-	s = ft_itoa_base_ll_pos(res, 10);
+	if (!(res = ft_get_num_modlen(f)))
+		zero = '1';
+	if (res < -9223372036854775807)
+	{
+		res_c = (unsigned long long)LLONG_MAX + 1;
+		s = ft_itoa_base_ull(res, 10, 'a');
+	}
+	else
+		s = ft_itoa_base_ll_pos(res, 10);
 	length = ft_strlen(s);
 	if (f->width > 0 && !f->fm)
 		print_flags_with_width(f, res, length);
 	else if (f->width == 0 || (f->width > 0 && f->fm))
 		print_flags_without_width(f, res, length);
-	ft_putstr(s);
+	(f->precis == 0 && zero == '1') ? 0 : ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		if (f->precis < f->width)
 		{
@@ -128,6 +165,5 @@ void			ft_print_int(t_printf *f)
 			else
 				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, length + 1) : ft_ispacing(' ', f, length);
 		}
-	f->len += length;
+	(f->precis == 0 && zero == '1') ? (f->len += 0) : (f->len += length);
 }
-//не обработан 0 (?) и maxmin hh, h, l, ll

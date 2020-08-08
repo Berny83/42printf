@@ -23,7 +23,8 @@
 indefinite number of arguments*/
 
 #define FLAGS "#0-+ "
-#define SPECIFIER "cspdiouxXf%"
+#define SPECIFIER "cspdiouxXf%Z"
+#define BIG_BUFF 60000
 
 typedef struct	str_printf
 {
@@ -37,6 +38,7 @@ typedef struct	str_printf
 	long int	precis;
 	char		*modln; //2
 	char		convs;
+	int			sign;
 
 	int			len;
 	int			i;
@@ -50,11 +52,32 @@ typedef struct	s_count
 	int			k;
 }				t_count;
 
+typedef struct				s_dbl
+{
+	unsigned long long		m: 64;
+	unsigned long long		e: 15;
+	unsigned long long		s: 1;
+}							t_dbl;
+
+typedef union				u_mask
+{
+	t_dbl					bits;
+	long double				num;
+}							t_mask;
+
+typedef	struct				s_buf
+{
+	char					*wh_num;
+	char					*div_num;
+	char					*pow_2;
+	char					*pow_5;
+}							t_buf;
+
 // ----------------- main funstions ----------------------
 
 int			ft_printf(const char *format, ...);
 int			ft_parse_format(t_printf *f);
-void		ft_get_all_flags(t_printf *f);
+int			ft_get_all_flags(t_printf *f);
 
 // ----------------- init funstions -----------------------
 
@@ -80,6 +103,7 @@ void		ft_print_uint(t_printf *f);
 void		ft_print_oint(t_printf *f);
 void		ft_print_xint(t_printf *f);
 void		ft_print_percent(t_printf *f);
+void		ft_print_other(t_printf *f);
 
 //--------------- support functions ---------------------
 
@@ -87,6 +111,20 @@ void				ft_spacing(char c, t_printf *f, int length);
 void				ft_ispacing(char c, t_printf *f, int length);
 unsigned long long	ft_get_unum_modlen(t_printf *f);
 void				ft_errors(int i);
+
+//--------------- poatmeal -----------------------------
+
+void						init_f(t_printf *get);
+int							mem_alloc(t_buf *buf);
+void						take_to_2(t_buf *buf, int pw);
+void						take_to_5(t_buf *buf, int pow, int nul);
+void						print_f(t_buf *buf, t_printf *get);
+void						free_buf(t_buf *buf);
+void						ft_round(t_buf *buf, t_printf *get);
+void						change_div(t_buf *buf, int i);
+void						change_whole(t_buf *buf);
+void						check_plus_space(t_printf *get);
+void						fill_width(t_buf *buf, t_printf *get);
 
 //--------------- libft.a functions ---------------------
 
@@ -105,5 +143,7 @@ char				*ft_itoa_base_ll_pos(long long num, int base);
 char				*ft_itoa_base_ull(unsigned long long num, int base, char c);
 void				ft_putunbr(unsigned long long n);
 void				ft_putendl(char const *s);
+
+void				*ft_memalloc(size_t size);
 
 #endif
