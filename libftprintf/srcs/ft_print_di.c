@@ -34,10 +34,10 @@ static void check_int_error_flags(t_printf *f)
 {
 	if (f->fh)
 		ft_errors(9);
-	if (f->fz && f->fm)
-		ft_errors(10);
-	if (f->fp && f->fs)
-		ft_errors(11);
+	// if (f->fz && f->fm)
+	// 	ft_errors(10);
+	// if (f->fp && f->fs)
+	// 	ft_errors(11);
 }
 
 static void print_flags_with_width(t_printf *f, long long res, int length)
@@ -55,7 +55,7 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 		if ((res >= 0 && (f->fp || f->fs)) || res < 0)
 		{
 			(f->fp && res > 0) ? ft_putchar('+') : 0;
-			(f->fs && res > 0) ? ft_putchar('0') : 0;
+			(f->fs && !f->fp && res > 0) ? ft_putchar(' ') : 0;
 			(res < 0 && !f->fz) ? ft_putchar('-') : 0;
 			f->len++;
 		}
@@ -94,7 +94,8 @@ static void print_flags_without_width(t_printf *f, long long res, int length)
 	}
 	if (res >= 0 && (f->fp || f->fs))
 	{
-		(f->fp) ? ft_putchar('+') : ft_putchar(' ');
+		(f->fp && res > 0) ? ft_putchar('+') : 0;
+		(f->fs && !f->fp && res > 0) ? ft_putchar(' ') : 0;
 		f->len++;
 	}
 	if (f->precis >= f->width)

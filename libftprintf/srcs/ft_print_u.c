@@ -29,8 +29,8 @@ static void check_uint_error_flags(t_printf *f)
 {
 	if (f->fh || f->fp || f->fs)
 		ft_errors(12);
-	if (f->fm && f->fz)
-		ft_errors(10);
+	// if (f->fm && f->fz)
+	// 	ft_errors(10);
 	if (f->fz && (f->precis >= 0))
 		ft_errors(14);
 }

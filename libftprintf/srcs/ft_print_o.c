@@ -72,8 +72,8 @@ static void check_oint_error_flags(t_printf *f)
 {
 	if (f->fs || f->fp)
 		ft_errors(13);
-	if (f->fm && f->fz)
-		ft_errors(10);
+	// if (f->fm && f->fz)
+	// 	ft_errors(10);
 	if (f->fz && f->precis >= 0)
 		ft_errors(14);
 }
