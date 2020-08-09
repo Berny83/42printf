@@ -41,7 +41,7 @@ int				main(void)
 	// ft_printf("Hooray %5d\n", 8);
 
 	//---------------кол-чо напечатанных символов------------
-	int lenpp = 0;
+	// int lenpp = 0;
 	int lenfp = 0;
 	// char c = 'a';
 
@@ -69,10 +69,10 @@ int				main(void)
 	// int n = printf("%Z\n");
 	// double ff = 154.23;
 
-	lenpp = printf("pp =%3u\n", 0);
-	lenfp = ft_printf("fp =%3u\n", 0);
+	// lenpp = printf("pp =%Z", 1);
+	lenfp = ft_printf("%");
 
-	printf("lenpp = %i\n", lenpp);
+	// printf("lenpp = %i\n", lenpp);
 	printf("lenfp = %i\n", lenfp);
 
 	// printf("%d", n);

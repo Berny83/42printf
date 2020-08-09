@@ -23,7 +23,7 @@
 indefinite number of arguments*/
 
 #define FLAGS "#0-+ "
-#define SPECIFIER "cspdiouxXf%Z"
+#define SPECIFIER "cspdiouUxXf%Z"
 #define BIG_BUFF 60000
 
 typedef struct	str_printf
@@ -41,6 +41,7 @@ typedef struct	str_printf
 	char		convs;
 	int			sign;
 	int			lfloat;
+	int			star;
 
 	int			len;
 	int			i;
@@ -111,7 +112,7 @@ void		ft_print_other(t_printf *f);
 
 void				ft_spacing(char c, t_printf *f, int length);
 void				ft_ispacing(char c, t_printf *f, int length);
-unsigned long long	ft_get_unum_modlen(t_printf *f);
+uintmax_t		ft_get_unum_modlen(t_printf *f);
 void				ft_errors(int i);
 
 //--------------- poatmeal -----------------------------

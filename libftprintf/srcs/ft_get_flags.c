@@ -52,8 +52,10 @@ t_printf	*get_flags_hzmps(t_printf *f)
 
 t_printf	*get_width(t_printf *f)
 {
-	while (f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9')
+	while ((f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9') || f->cpy[f->i] == '*')
 	{
+		if (f->cpy[f->i] == '*')
+			f->star = 1;
 		f->width = f->width * 10;
 		f->width = f->width + (f->cpy[f->i] - '0');
 		f->i++;
@@ -66,8 +68,12 @@ t_printf	*get_precision(t_printf *f)
 	f->i++;
 	f->precis = 0;
 	f->f_prec = 0;
-	while (f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9')
+	while(f->cpy[f->i] == '.')
+		f->i++;
+	while ((f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9') || f->cpy[f->i] == '*')
 	{
+		if (f->cpy[f->i] == '*')
+			f->star = 1;
 		f->precis = f->precis * 10;
 		f->precis = f->precis + (f->cpy[f->i] - '0');
 		f->f_prec = f->f_prec * 10;
@@ -85,7 +91,7 @@ t_printf	*get_mod_length(t_printf *f)
 	m.j = 0;
 	m.k = 0;
 	m.l = 0;
-	lh = "lhL";
+	lh = "lhLjz";
 	while (lh[m.l++])
 	{
 		while (lh[m.k])
@@ -105,7 +111,16 @@ t_printf	*get_mod_length(t_printf *f)
 
 t_printf	*get_conversion(t_printf *f)
 {
-	f->convs = *(ft_strchr(SPECIFIER, f->cpy[f->i]));
+	// f->convs = *(ft_strchr(SPECIFIER, f->cpy[f->i]));
+	int			count;
 
+	count = 0;
+	count = f->i;
+	while (f->cpy[count])
+	{
+		if ((f->convs = *(ft_strchr(SPECIFIER, f->cpy[count]))))
+			return (f);
+		count++;
+	}
 	return(f);
 }

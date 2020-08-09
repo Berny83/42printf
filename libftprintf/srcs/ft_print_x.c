@@ -14,7 +14,7 @@
 
 static void x_print_flags_with_widthfm(t_printf *f, int length, char zero)
 {
-	if (f->fz)
+	if (f->fz && f->precis < 0)
 	{
 		if (f->fh && zero != '1')
 		{
@@ -24,7 +24,7 @@ static void x_print_flags_with_widthfm(t_printf *f, int length, char zero)
 		}
 		(f->fh && zero != '1') ? ft_ispacing('0', f, length + 2) : ft_ispacing('0', f, length);
 	}
-	else if (!f->fz && (f->precis >= f->width))
+	else if (f->precis >= f->width)
 	{
 		if (f->fh && zero != '1')
 		{
@@ -96,13 +96,11 @@ static void check_xint_error_flags(t_printf *f)
 {
 	if (f->fs || f->fp)
 		ft_errors(13);
-	if (f->fz && f->precis >= 0)
-		ft_errors(14);
 }
 
 void					ft_print_xint(t_printf *f)
 {
-	unsigned long long	res;
+	uintmax_t		res;
 	unsigned int		length;
 	char				*s;
 	char				zero;
@@ -122,7 +120,12 @@ void					ft_print_xint(t_printf *f)
 	if (f->width > 0 && f->fm)
 	{
 		if (f->precis <= length)
-			(f->fh && zero != '1') ? ft_ispacing(' ', f, (length + 2)) : ft_ispacing(' ', f, length);
+		{
+			if (res == 0 && f->precis == 0)
+				ft_ispacing(' ', f, 0);
+			else
+				(f->fh && zero != '1') ? ft_ispacing(' ', f, (length + 2)) : ft_ispacing(' ', f, length);
+		}
 		else if (f->precis < f->width)
 			(f->fh && zero != '1') ? ft_ispacing(' ', f, f->precis + 2): ft_ispacing(' ', f, f->precis);
 	}

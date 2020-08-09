@@ -40,6 +40,7 @@ t_printf		*ft_init(const char *format)
 	new->width = 0;
 	new->precis = -1;
 	new->f_prec = 6;
+	new->star = 0;
 	new->fh = '\0';
 	new->fz = '\0';
 	new->fm = '\0';
@@ -62,7 +63,8 @@ int			ft_parse_format(t_printf *f)
 		if (f->cpy[f->i] == '%')
 		{
 			if (!(ft_get_all_flags(f)))
-				return (0);
+				return (f->len);
+			// printf("Z = %i\n", f->len);
 			ft_reset_init(f);
 		}
 		else
@@ -71,8 +73,9 @@ int			ft_parse_format(t_printf *f)
 			f->len++;
 		}
 		f->i++;
+		// printf("Zz = %i\n", f->len);
 	}
-	// printf("cputttt = %i\n", f->len);
+	// printf("fflen = %i\n", f->len);
 	return(f->len);
 }
 
@@ -81,6 +84,7 @@ t_printf		*ft_reset_init(t_printf *f)
 	f->width = 0;
 	f->precis = -1;
 	f->f_prec = 6;
+	f->star = 0;
 	f->fh = '\0';
 	f->fz = '\0';
 	f->fm = '\0';
@@ -97,6 +101,8 @@ t_printf		*ft_reset_init(t_printf *f)
 int				ft_get_all_flags(t_printf *f)
 {
 	f->i++;
+	if (f->cpy[f->i] == '\0')
+		return(0);
 	get_flags_hzmps(f);
 	// printf("str->flags = \"%c%c%c%c%c\"\n", f->fh, f->fz, f->fm, f->fp, f->fs);
 	// printf("str->fh = \"%c\"\n", f->fh);
@@ -116,11 +122,9 @@ int				ft_get_all_flags(t_printf *f)
 	// printf("str->convs = %c\n", f->convs);
 	// printf("i = %i\n", f->i);
 	if (f->convs)
-	{
 		ft_print_all(f);
-		// printf("get_all_flags= %i\n", f->len);
-	}
 	else
 		return(0);
+	// printf("get_all_flags= %i\n", f->len);
 	return(1);
 }

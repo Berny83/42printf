@@ -25,7 +25,6 @@ static void				o_print_flags_without_fm(t_printf *f, int length, char zero)
 	}
 	else if (!f->fz && (f->precis >= f->width))
 	{
-		// (f->fh && zero != '1') ? ft_ispacing('0', f, (length + 2)): ft_ispacing('0', f, length + 1);
 		if (f->fh && zero != '1')
 		{
 			ft_putchar('0');
@@ -96,7 +95,7 @@ static void check_oint_error_flags(t_printf *f)
 
 void					ft_print_oint(t_printf *f)
 {
-	unsigned long long	res;
+	uintmax_t		res;
 	unsigned int		length;
 	char				*s;
 	char				zero;
@@ -118,7 +117,6 @@ void					ft_print_oint(t_printf *f)
 			(f->fh && zero != '1') ? ft_ispacing(' ', f, (length + 1)) : ft_ispacing(' ', f, length);
 		else if (f->precis < f->width)
 			(f->fh && zero != '1') ? ft_ispacing(' ', f, f->precis + 1): ft_ispacing(' ', f, f->precis);
-			// ft_ispacing(' ', f, f->precis);
 	}
 	(f->precis == 0 && zero == '1' && !f->fh) ? (f->len += 0) : (f->len += length);
 }

@@ -12,9 +12,9 @@
 
 #include "ft_printf.h"
 
-static long long	ft_get_num_modlen(t_printf *f)
+static intmax_t		ft_get_num_modlen(t_printf *f)
 {
-	long long		num;
+	intmax_t		num;
 
 	if (ft_strcmp(f->modln, "hh") == 0)
 		num = (signed char)va_arg(f->avs, int);
@@ -24,9 +24,13 @@ static long long	ft_get_num_modlen(t_printf *f)
 		num = (long)va_arg(f->avs, long int);
 	else if (ft_strcmp(f->modln, "ll") == 0)
 		num = (long long)va_arg(f->avs, long long int);
+	else if (ft_strcmp(f->modln, "j") == 0)
+		num = (intmax_t)va_arg(f->avs, intmax_t);
+	else if (ft_strcmp(f->modln, "z") == 0)
+		num = (size_t)va_arg(f->avs, size_t);
 	else
 		num = (int)va_arg(f->avs, int);
-	num = (long long)num;
+	num = (intmax_t)num;
 	return (num);
 }
 
@@ -137,7 +141,7 @@ static void print_flags_without_width(t_printf *f, long long res, int length)
 
 void			ft_print_int(t_printf *f)
 {
-	long long	res;
+	intmax_t	res;
 	int			length;
 	char		*s;
 	char		zero;
@@ -150,7 +154,7 @@ void			ft_print_int(t_printf *f)
 	if (res < -9223372036854775807)
 	{
 		res_c = (unsigned long long)LLONG_MAX + 1;
-		s = ft_itoa_base_ull(res, 10, 'a');
+		s = ft_itoa_base_ull(res_c, 10, 'a');
 	}
 	else
 		s = ft_itoa_base_ll_pos(res, 10);

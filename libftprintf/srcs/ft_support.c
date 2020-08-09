@@ -71,11 +71,13 @@ void		ft_ispacing(char c, t_printf *f, int length)
 	}
 }
 
-unsigned long long	ft_get_unum_modlen(t_printf *f)
+uintmax_t	ft_get_unum_modlen(t_printf *f)
 {
-	unsigned long long		num;
+	uintmax_t		num;
 
-	if (ft_strcmp(f->modln, "hh") == 0)
+	if (f->convs == 'U')
+		num = (unsigned long)va_arg(f->avs, unsigned long int);
+	else if (ft_strcmp(f->modln, "hh") == 0)
 		num = (unsigned char)va_arg(f->avs, unsigned int);
 	else if (ft_strcmp(f->modln, "h") == 0)
 		num = (unsigned short)va_arg(f->avs, unsigned int);
@@ -83,8 +85,12 @@ unsigned long long	ft_get_unum_modlen(t_printf *f)
 		num = (unsigned long)va_arg(f->avs, unsigned long int);
 	else if (ft_strcmp(f->modln, "ll") == 0 || ft_strcmp(f->modln, "L") == 0)
 		num = (unsigned long long)va_arg(f->avs, unsigned long long int);
+	else if (ft_strcmp(f->modln, "j") == 0)
+		num = (uintmax_t)va_arg(f->avs, uintmax_t);
+	else if (ft_strcmp(f->modln, "z") == 0)
+		num = (size_t)va_arg(f->avs, size_t);
 	else
 		num = (unsigned int)va_arg(f->avs, unsigned int);
-	num = (unsigned long long)num;
+	num = (uintmax_t)num;
 	return (num);
 }

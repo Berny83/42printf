@@ -14,17 +14,21 @@
 
 void		ft_print_all(t_printf *f)
 {
-	(f->convs == 's') ? ft_print_str(f) : 0;
-	(f->convs == 'c') ? ft_print_char(f) : 0;
-	(f->convs == 'p') ? ft_print_address(f) : 0;
-	(f->convs == 'd' || f->convs == 'i') ? ft_print_int(f) : 0;
-	(f->convs == 'u') ? ft_print_uint(f) : 0;
-	(f->convs == 'o') ? ft_print_oint(f) : 0;
-	(f->convs == 'x' || f->convs == 'X') ? ft_print_xint(f) : 0;
-	(f->convs == 'f') ? init_f(f) : 0;
-	(f->convs == '%') ? ft_print_percent(f) : 0;
-	(f->convs == 'Z') ? ft_print_other(f) : 0;
-	// printf("flen+lengthhfhf = %i\n", f->len);
+	if (f->star == 1)
+		ft_putstr("It's bonus\n");
+	else 
+	{
+		(f->convs == 's') ? ft_print_str(f) : 0;
+		(f->convs == 'c') ? ft_print_char(f) : 0;
+		(f->convs == 'p') ? ft_print_address(f) : 0;
+		(f->convs == 'd' || f->convs == 'i') ? ft_print_int(f) : 0;
+		(f->convs == 'u' || f->convs == 'U') ? ft_print_uint(f) : 0;
+		(f->convs == 'o') ? ft_print_oint(f) : 0;
+		(f->convs == 'x' || f->convs == 'X') ? ft_print_xint(f) : 0;
+		(f->convs == 'f') ? init_f(f) : 0;
+		(f->convs == '%') ? ft_print_percent(f) : 0;
+		(f->convs == 'Z') ? ft_print_other(f) : 0;
+	}
 }
 
 void		ft_print_str(t_printf *f)
@@ -32,18 +36,17 @@ void		ft_print_str(t_printf *f)
 	char	*res;
 	int		length;
 
-	// res = va_arg(f->avs, char*);
 	if (!(res = va_arg(f->avs, char*)))
 		res = "(null)";
 	if (ft_strchr(f->modln, 'l') || ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L'))
 		ft_errors(2);
-	if (f->fh || f->fz || f->fp || f->fs)
+	if (f->fh || f->fp || f->fs)
 		ft_errors(1);
 	if (f->precis >= 0)
 		res = ft_strndup(res, f->precis);
 	length = ft_strlen(res);
 	if (f->width > 0 && !f->fm)
-		ft_spacing(' ', f, length);
+		(f->fz) ? ft_spacing('0', f, length) : ft_spacing(' ', f, length);
 	ft_putstr(res);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
@@ -61,18 +64,18 @@ void		ft_print_char(t_printf *f)
 		res = (char)va_arg(f->avs, int);
 	if (ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L') || ft_strcmp(f->modln, "ll") == 0)
 		ft_errors(4);
-	if (f->fh || f->fz || f->fp)
+	if (f->fh || f->fp)
 		ft_errors(3);
 	length = 1;
 	if (f->width > 0 && !f->fm)
-		ft_spacing(' ', f, length);
+		(f->fz) ? ft_spacing('0', f, length) : ft_spacing(' ', f, length);
 	ft_putchar(res);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
 	f->len += length;
 }
 
-void					ft_print_address(t_printf *f)
+void			ft_print_address(t_printf *f)
 {
 	unsigned long		res;
 	int					length;
