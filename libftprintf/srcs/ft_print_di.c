@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_di.c                                      :+:      :+:    :+:   */
+/*   ft_print_di.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/01 16:28:42 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/01 16:28:42 by aagrivan         ###   ########.fr       */
+/*   Created: 2020/08/09 19:26:59 by aagrivan          #+#    #+#             */
+/*   Updated: 2020/08/09 19:27:14 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,14 @@ static intmax_t		ft_get_num_modlen(t_printf *f)
 		num = (long)va_arg(f->avs, long int);
 	else if (ft_strcmp(f->modln, "ll") == 0)
 		num = (long long)va_arg(f->avs, long long int);
-	else if (ft_strcmp(f->modln, "j") == 0)
+	else if (ft_strcmp(f->modln, "j") == 0 || ft_strcmp(f->modln, "jz") == 0 || ft_strcmp(f->modln, "jh") == 0)
 		num = (intmax_t)va_arg(f->avs, intmax_t);
-	else if (ft_strcmp(f->modln, "z") == 0)
+	else if (ft_strcmp(f->modln, "z") == 0 || ft_strcmp(f->modln, "zh") == 0)
 		num = (size_t)va_arg(f->avs, size_t);
 	else
 		num = (int)va_arg(f->avs, int);
 	num = (intmax_t)num;
 	return (num);
-}
-
-static void check_int_error_flags(t_printf *f)
-{
-	if (f->fh)
-		ft_errors(9);
 }
 
 static void print_flags_with_width(t_printf *f, long long res, int length)
@@ -63,7 +57,7 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 			}
 			else if (!f->fp && !f->fs)
 			{
-				if (length != f->width)
+				if (length < f->width)
 					{
 						ft_putchar('0');
 						f->len++;
@@ -135,7 +129,7 @@ static void print_flags_without_width(t_printf *f, long long res, int length)
 	if (f->precis >= f->width)
 		ft_ispacing('0', f, (length + 1));
 	else
-		ft_ispacing('0', f, (((f->width - f->precis) + length)));
+		(f->fz && f->fp && f->fs && f->fm && f->precis > 0) ? 0 : ft_ispacing('0', f, (((f->width - f->precis) + length)));
 	
 }
 
@@ -148,13 +142,12 @@ void			ft_print_int(t_printf *f)
 	unsigned long long	res_c;
 
 	zero = '0';
-	check_int_error_flags(f);
 	if (!(res = ft_get_num_modlen(f)))
 		zero = '1';
 	if (res < -9223372036854775807)
 	{
 		res_c = (unsigned long long)LLONG_MAX + 1;
-		s = ft_itoa_base_ull(res_c, 10, 'a');
+		s = ftbaseull(res_c, 10, 'a');
 	}
 	else
 		s = ft_itoa_base_ll_pos(res, 10);
@@ -168,7 +161,14 @@ void			ft_print_int(t_printf *f)
 		if (f->precis < f->width)
 		{
 			if (f->precis > length)
-				(f->fp || f->fs || res < 0) ? ft_ispacing(' ', f, f->precis + 1) : ft_ispacing(' ', f, f->precis);
+			{
+				if (f->fz && f->fp && f->fs && f->fm && f->precis > 0)
+					ft_ispacing(' ', f, length + 1);
+				else if (f->fp || f->fs || res < 0)
+					ft_ispacing(' ', f, f->precis + 1);
+				else
+					ft_ispacing(' ', f, f->precis);
+			}
 			else
 			{
 				if (f->fp || f->fs || res < 0)
@@ -180,4 +180,5 @@ void			ft_print_int(t_printf *f)
 			}
 		}
 	(f->precis == 0 && zero == '1') ? (f->len += 0) : (f->len += length);
+	free(s);
 }

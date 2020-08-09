@@ -31,15 +31,15 @@ static unsigned long	get_length_num(unsigned long long num, int base)
 	unsigned long		l;
 
 	l = (num == 0) ? 1 : 0;
-	while(num)
+	while (num)
 	{
 		l++;
 		num /= base;
 	}
-	return(l);
+	return (l);
 }
 
-char				*ft_itoa_base_ull(unsigned long long num, int base, char c)
+char					*ftbaseull(unsigned long long num, int base, char c)
 {
 	char			*str;
 	unsigned long	len;
@@ -58,5 +58,5 @@ char				*ft_itoa_base_ull(unsigned long long num, int base, char c)
 		str[len--] = fill_string(prod, c);
 	}
 	(num == 0) ? str[len] = '0' : 0;
-	return(str);
+	return (str);
 }

@@ -11,12 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-static void check_uint_error_flags(t_printf *f)
-{
-	if (f->fh)
-		ft_errors(12);
-}
+#include <stdio.h>
 
 static void print_flags_width(t_printf *f, int length, char zero)
 {
@@ -62,17 +57,15 @@ void					ft_print_uint(t_printf *f)
 	char				zero;
 
 	zero = '0';
-	check_uint_error_flags(f);
 	if (!(res = ft_get_unum_modlen(f)))
 		zero = '1';
 	if (res > 4294967295)
 	{
 		res_c = (unsigned long long)4294967295 + 1;
-		s = ft_itoa_base_ull(res_c, 10, 'a');
+		s = ftbaseull(res_c, 10, 'a');
 	}
 	else
-		s = ft_itoa_base_ll_pos(res, 10);
-	s = ft_itoa_base_ull(res, 10, 'a');
+		s = ftbaseull(res, 10, 'a');
 	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
 		print_flags_width(f, length, zero);
@@ -90,4 +83,5 @@ void					ft_print_uint(t_printf *f)
 			ft_ispacing(' ', f, f->precis);
 	}
 	(f->precis == 0 && zero == '1' && !f->fh) ? (f->len += 0) : (f->len += length);
+	free(s);
 }

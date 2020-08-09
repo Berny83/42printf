@@ -38,10 +38,6 @@ void		ft_print_str(t_printf *f)
 
 	if (!(res = va_arg(f->avs, char*)))
 		res = "(null)";
-	if (ft_strchr(f->modln, 'l') || ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L'))
-		ft_errors(2);
-	if (f->fh || f->fp || f->fs)
-		ft_errors(1);
 	if (f->precis >= 0)
 		res = ft_strndup(res, f->precis);
 	length = ft_strlen(res);
@@ -62,10 +58,6 @@ void		ft_print_char(t_printf *f)
 		res = (unsigned long)va_arg(f->avs, long int);
 	else
 		res = (char)va_arg(f->avs, int);
-	if (ft_strchr(f->modln, 'h') || ft_strchr(f->modln, 'L') || ft_strcmp(f->modln, "ll") == 0)
-		ft_errors(4);
-	if (f->fh || f->fp)
-		ft_errors(3);
 	length = 1;
 	if (f->width > 0 && !f->fm)
 		(f->fz) ? ft_spacing('0', f, length) : ft_spacing(' ', f, length);
@@ -81,21 +73,16 @@ void			ft_print_address(t_printf *f)
 	int					length;
 	char				*s;
 
-	if (f->fh || f->fz || f->fp || f->fs)
-		ft_errors(6);
 	res = (unsigned long)va_arg(f->avs, void*);
 	s = ft_itoa_base_address16(res);
 	length = ft_strlen(s);
-	if (ft_strlen(f->modln) != 0)
-		ft_errors(7);
-	if (f->precis >= 0)
-		ft_errors(8);
 	if (f->width > 0 && !f->fm)
 		ft_spacing(' ', f, length);
 	ft_putstr(s);
 	if (f->width > 0 && f->fm)
 		ft_spacing(' ', f, length);
 	f->len += length;
+	free(s);
 }
 
 void		ft_print_percent(t_printf *f)

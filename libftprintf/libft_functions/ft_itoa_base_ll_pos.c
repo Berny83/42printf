@@ -34,7 +34,7 @@ static unsigned long	get_length_num(long long nbr, int base)
 		l++;
 		nbr /= base;
 	}
-	return(l);
+	return (l);
 }
 
 char			*ft_itoa_base_ll_pos(long long num, int base)
@@ -58,5 +58,5 @@ char			*ft_itoa_base_ll_pos(long long num, int base)
 		str[len--] = fill_string(prod);
 	}
 	(num == 0) ? str[len] = '0' : 0;
-	return(str);
+	return (str);
 }

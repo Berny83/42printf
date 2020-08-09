@@ -92,12 +92,6 @@ static void				x_print_flags_with_fm(t_printf *f, int length, char zero)
 	}
 }
 
-static void check_xint_error_flags(t_printf *f)
-{
-	if (f->fs || f->fp)
-		ft_errors(13);
-}
-
 void					ft_print_xint(t_printf *f)
 {
 	uintmax_t		res;
@@ -106,11 +100,10 @@ void					ft_print_xint(t_printf *f)
 	char				zero;
 
 	zero = '0';
-	check_xint_error_flags(f);
 	if (!(res = ft_get_unum_modlen(f)))
 		zero = '1';
-	s = (f->convs == 'x') ? ft_itoa_base_ull(res, 16, 'a') : \
-	ft_itoa_base_ull(res, 16, 'A');
+	s = (f->convs == 'x') ? ftbaseull(res, 16, 'a') : \
+	ftbaseull(res, 16, 'A');
 	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
 		x_print_flags_with_widthfm(f, length, zero);
@@ -130,4 +123,5 @@ void					ft_print_xint(t_printf *f)
 			(f->fh && zero != '1') ? ft_ispacing(' ', f, f->precis + 2): ft_ispacing(' ', f, f->precis);
 	}
 	(f->precis == 0 && zero == '1') ? (f->len += 0) : (f->len += length);
+	free (s);
 }

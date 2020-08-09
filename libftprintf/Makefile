@@ -6,7 +6,7 @@
 #    By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 17:12:11 by aagrivan          #+#    #+#              #
-#    Updated: 2020/08/08 15:20:11 by aagrivan         ###   ########.fr        #
+#    Updated: 2020/08/09 18:29:07 by aagrivan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS = ft_get_flags.c \
 		pow_5.c \
 		print_f.c \
 		round.c \
-		round_change.c
+		round_change.c \
+		nan_inf.c 
 SRC_DIR = srcs/
 SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
 

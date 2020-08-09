@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/29 09:27:26 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/07/29 09:27:26 by aagrivan         ###   ########.fr       */
+/*   Created: 2020/08/09 19:09:55 by aagrivan          #+#    #+#             */
+/*   Updated: 2020/08/09 19:17:55 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ char		*ft_strndup(const char *str, int count)
 
 	i = 0;
 	if (!str)
-		return(NULL);
+		return (NULL);
 	if (!(cp = (char *)malloc(sizeof(char) + count + 1)))
-		return(NULL);
+		return (NULL);
 	while (i < count)
 	{
 		cp[i] = str[i];
 		i++;
 	}
 	cp[i] = '\0';
-	return(cp);
+	return (cp);
 }

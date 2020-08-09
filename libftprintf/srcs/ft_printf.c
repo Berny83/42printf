@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 int				ft_printf(const char *format, ...)
 {
@@ -48,7 +49,7 @@ t_printf		*ft_init(const char *format)
 	new->fs = '\0';
 	new->sign = 1;
 	new->lfloat = 0;
-	new->modln = ft_strnew(2);
+	ft_memset(new->modln, '\0', 3);
 	new->convs = '\0';
 	new->len = 0;
 	new->i = 0;
@@ -64,7 +65,6 @@ int			ft_parse_format(t_printf *f)
 		{
 			if (!(ft_get_all_flags(f)))
 				return (f->len);
-			// printf("Z = %i\n", f->len);
 			ft_reset_init(f);
 		}
 		else
@@ -73,9 +73,7 @@ int			ft_parse_format(t_printf *f)
 			f->len++;
 		}
 		f->i++;
-		// printf("Zz = %i\n", f->len);
 	}
-	// printf("fflen = %i\n", f->len);
 	return(f->len);
 }
 
@@ -92,7 +90,7 @@ t_printf		*ft_reset_init(t_printf *f)
 	f->fs = '\0';
 	f->sign = 1;
 	f->lfloat = 0;
-	f->modln = ft_memset(f->modln, '\0', 2);
+	ft_memset(f->modln, '\0', 3);
 	f->convs = '\0';
 	
 	return(f);
@@ -104,27 +102,18 @@ int				ft_get_all_flags(t_printf *f)
 	if (f->cpy[f->i] == '\0')
 		return(0);
 	get_flags_hzmps(f);
-	// printf("str->flags = \"%c%c%c%c%c\"\n", f->fh, f->fz, f->fm, f->fp, f->fs);
-	// printf("str->fh = \"%c\"\n", f->fh);
-	// printf("str->fz = \"%c\"\n", f->fz);
-	// printf("str->fm = \"%c\"\n", f->fm);
-	// printf("str->fp = \"%c\"\n", f->fp);
-	// printf("str->fs = \"%c\"\n", f->fs);
-	// printf("i = %i\n", str->i);
 	get_width(f);
-	// printf("fieldwidth = %li\n", f->width);
 	if (f->cpy[f->i] == '.')
 		get_precision(f);
-	// printf("precision = %li\n", f->precis);
 	get_mod_length(f);
-	// printf("str->mod_len = \"%s\"\n", f->modln);
 	get_conversion(f);
-	// printf("str->convs = %c\n", f->convs);
-	// printf("i = %i\n", f->i);
+	// printf("modlen = %s\n", f->modln);
+	// printf("convers = %c\n", f->convs);
+	// printf("precision =%li\n", f->precis);
+	// printf("width = %li\n", f->width);
 	if (f->convs)
 		ft_print_all(f);
 	else
 		return(0);
-	// printf("get_all_flags= %i\n", f->len);
 	return(1);
 }

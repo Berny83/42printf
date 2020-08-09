@@ -37,7 +37,7 @@ static unsigned long	get_length_num(unsigned long num)
 		l++;
 		num /= 16;
 	}
-	return(l);
+	return (l);
 }
 
 char		*ft_itoa_base_address16(unsigned long num)
@@ -60,5 +60,5 @@ char		*ft_itoa_base_address16(unsigned long num)
 	(num == 0) ? str[len] = '0' : 0;
 	str[1] = 'x';
 	str[0] = '0';
-	return(str);
+	return (str);
 }

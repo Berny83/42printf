@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_str.c                                     :+:      :+:    :+:   */
+/*   ft_get_flags.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/07/28 15:19:15 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/07/28 15:19:15 by aagrivan         ###   ########.fr       */
+/*   Created: 2020/08/09 19:23:04 by aagrivan          #+#    #+#             */
+/*   Updated: 2020/08/09 19:26:03 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ static t_printf		*check_flags_hzmps(t_printf *f)
 		f->fp = '+';
 	else if (f->cpy[f->i] == ' ')
 		f->fs = ' ';
-	return(f);
+	return (f);
 }
 
-t_printf	*get_flags_hzmps(t_printf *f)
+t_printf			*get_flags_hzmps(t_printf *f)
 {
-	t_count	pl;
+	t_count			pl;
 
 	pl.k = 0;
 	pl.l = 0;
@@ -37,7 +37,7 @@ t_printf	*get_flags_hzmps(t_printf *f)
 	{
 		while (FLAGS[pl.k])
 		{
-			if (FLAGS[pl.k] == f->cpy[f->i])
+			while (FLAGS[pl.k] == f->cpy[f->i])
 			{
 				check_flags_hzmps(f);
 				f->i++;
@@ -47,10 +47,10 @@ t_printf	*get_flags_hzmps(t_printf *f)
 		pl.k = 0;
 		pl.l++;
 	}
-	return(f);
+	return (f);
 }
 
-t_printf	*get_width(t_printf *f)
+t_printf			*get_width(t_printf *f)
 {
 	while ((f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9') || f->cpy[f->i] == '*')
 	{
@@ -60,15 +60,15 @@ t_printf	*get_width(t_printf *f)
 		f->width = f->width + (f->cpy[f->i] - '0');
 		f->i++;
 	}
-	return(f);
+	return (f);
 }
 
-t_printf	*get_precision(t_printf *f)
+t_printf			*get_precision(t_printf *f)
 {
 	f->i++;
 	f->precis = 0;
 	f->f_prec = 0;
-	while(f->cpy[f->i] == '.')
+	while (f->cpy[f->i] == '.')
 		f->i++;
 	while ((f->cpy[f->i] >= '0' && f->cpy[f->i] <= '9') || f->cpy[f->i] == '*')
 	{
@@ -80,13 +80,13 @@ t_printf	*get_precision(t_printf *f)
 		f->f_prec = f->f_prec + (f->cpy[f->i] - '0');
 		f->i++;
 	}
-	return(f);
+	return (f);
 }
 
-t_printf	*get_mod_length(t_printf *f)
+t_printf			*get_mod_length(t_printf *f)
 {
-	t_count	m;
-	char	*lh;
+	t_count			m;
+	char			*lh;
 
 	m.j = 0;
 	m.k = 0;
@@ -97,30 +97,14 @@ t_printf	*get_mod_length(t_printf *f)
 		while (lh[m.k])
 		{
 			if (lh[m.k] == f->cpy[f->i])
-				{
-					if (f->cpy[f->i] == 'L')
-						f->lfloat = 1;
-					f->modln[m.j++] = f->cpy[f->i++];
-				}
+			{
+				if (f->cpy[f->i] == 'L')
+					f->lfloat = 1;
+				f->modln[m.j++] = f->cpy[f->i++];
+			}
 			m.k++;
 		}
 		m.k = 0;
 	}
-	return(f);
-}
-
-t_printf	*get_conversion(t_printf *f)
-{
-	// f->convs = *(ft_strchr(SPECIFIER, f->cpy[f->i]));
-	int			count;
-
-	count = 0;
-	count = f->i;
-	while (f->cpy[count])
-	{
-		if ((f->convs = *(ft_strchr(SPECIFIER, f->cpy[count]))))
-			return (f);
-		count++;
-	}
-	return(f);
+	return (f);
 }

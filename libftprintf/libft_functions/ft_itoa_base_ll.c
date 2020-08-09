@@ -31,27 +31,27 @@ static unsigned long	get_length_num(long long nbr, int base, long long num)
 
 	l = (num == 0) ? 1 : 0;
 	sign = (num < 0) ? 1 : 0;
-	while(nbr)
+	while (nbr)
 	{
 		l++;
 		nbr /= base;
 	}
-	return(l + sign);
+	return (l + sign);
 }
 
-char			*ft_itoa_base_ll(long long num, int base)
+char					*ft_itoa_base_ll(long long num, int base)
 {
-	char		*str;
-	unsigned long	len;
-	long long	prod;
-	long long	nbr;
+	char				*str;
+	unsigned long		len;
+	long long			prod;
+	long long			nbr;
 
 	if (base < 2 || base > 36)
 		return (NULL);
 	nbr = (num < 0) ? -num : num;
 	len = get_length_num(nbr, base, num);
 	if (!(str = ft_strnew(len)))
- 		return (NULL);
+		return (NULL);
 	len--;
 	while (nbr)
 	{
@@ -61,5 +61,5 @@ char			*ft_itoa_base_ll(long long num, int base)
 	}
 	(len == 0) ? str[len] = '-' : 0;
 	(num == 0) ? str[len] = '0' : 0;
-	return(str);
+	return (str);
 }

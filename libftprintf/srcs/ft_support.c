@@ -11,39 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-
-void		ft_errors(int i)
-{
-	if (i == 1)
-		ft_putendl("You can't use this flag with %s.");
-	else if (i == 2)
-		ft_putendl("You can't use length modifier with %s.");
-	else if (i == 3)
-		ft_putendl("You can't use this flag with %c.");
-	else if (i == 4)
-		ft_putendl("You can't use length modifier with %c.");
-	else if (i == 5)
-		ft_putendl("You can't use precision with %c.");
-	else if (i == 6)
-		ft_putendl("You can't use this flag with %p.");
-	else if (i == 7)
-		ft_putendl("You can't use length modifier with %p.");
-	else if (i == 8)
-		ft_putendl("You can't use precision with %p.");
-	else if (i == 9)
-		ft_putendl("'#' flag used with ‘%d’ gnu_printf format");
-	else if (i == 10)
-		ft_putendl("'0' flag ignored with '-' flag in gnu_printf format");
-	else if (i == 11)
-		ft_putendl("' ' flag ignored with '+' flag in gnu_printf format");
-	else if (i == 12)
-		ft_putendl("You can't use this flag with %u.");
-	else if (i == 13)
-		ft_putendl("You can't use this flag with %o.");
-	else if (i == 14)
-		ft_putendl("'0' flag ignored with precision and %u, %o, %xX gnu_printf format.");
-	exit(0);
-}
+#include <stdio.h>
 
 void		ft_ispacing(char c, t_printf *f, int length)
 {
@@ -61,8 +29,8 @@ void		ft_ispacing(char c, t_printf *f, int length)
 	}
 	else
 	{
-		if ((lensp = f->precis - (length - 1)) > 0) //width = (length of num + sign) -- on other side precision = (length of precision without sign)
-			while (lensp > 0) // cause > 0 lensp don't go to 0
+		if ((lensp = f->precis - (length - 1)) > 0)
+			while (lensp > 0)
 			{
 				ft_putchar(c);
 				f->len++;
@@ -74,6 +42,7 @@ void		ft_ispacing(char c, t_printf *f, int length)
 uintmax_t	ft_get_unum_modlen(t_printf *f)
 {
 	uintmax_t		num;
+	
 
 	if (f->convs == 'U')
 		num = (unsigned long)va_arg(f->avs, unsigned long int);
@@ -83,14 +52,39 @@ uintmax_t	ft_get_unum_modlen(t_printf *f)
 		num = (unsigned short)va_arg(f->avs, unsigned int);
 	else if (ft_strcmp(f->modln, "l") == 0)
 		num = (unsigned long)va_arg(f->avs, unsigned long int);
-	else if (ft_strcmp(f->modln, "ll") == 0 || ft_strcmp(f->modln, "L") == 0)
+	else if (ft_strcmp(f->modln, "ll") == 0)
 		num = (unsigned long long)va_arg(f->avs, unsigned long long int);
-	else if (ft_strcmp(f->modln, "j") == 0)
+	else if (ft_strcmp(f->modln, "j") == 0 || ft_strcmp(f->modln, "jz") == 0 || ft_strcmp(f->modln, "jh") == 0)
 		num = (uintmax_t)va_arg(f->avs, uintmax_t);
 	else if (ft_strcmp(f->modln, "z") == 0)
 		num = (size_t)va_arg(f->avs, size_t);
 	else
 		num = (unsigned int)va_arg(f->avs, unsigned int);
 	num = (uintmax_t)num;
+
 	return (num);
+}
+
+t_printf			*get_conversion(t_printf *f)
+{
+	int				count;
+
+	count = f->i;
+	while (f->cpy[count])
+	{
+		if (ft_strchr(FLAGS, f->cpy[count]))
+		{
+			get_flags_hzmps(f);
+			count++;
+		}
+		else if (f->cpy[count] == '.')
+			f->i++;
+		if (ft_strchr(SPECIFIER, f->cpy[count]))
+		{
+			f->convs = *(ft_strchr(SPECIFIER, f->cpy[count]));
+			return (f);
+		}
+		count++;
+	}
+	return (f);
 }
