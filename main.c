@@ -43,9 +43,9 @@ int				main(void)
 
 	//---------------кол-чо напечатанных символов------------
 	int lenpp1 = 0;
-	int lenpp2 = 0;
+	// int lenpp2 = 0;
 	int lenfp1 = 0;
-	int lenfp2 = 0;
+	// int lenfp2 = 0;
 	// char c = 'a';
 
 	// lenpp = printf("pp =%i\n", i); //int
@@ -78,20 +78,23 @@ int				main(void)
 	// printf("pp = {% 03d}\n", 0);
 	// lenpp = printf("pp =%.0p, %.p", 0, 0);// test_precision_u_higher_min_width_len_between_width_prec
 	// lenfp = ft_printf("fp =%4.15u\n", 42);
-	// lenpp = printf("pp =%4.15u\n", 42); //test_precision_o_higher_min_width -> printf("%15.4o", 42)
+	// lenpp = printf("pp =%4.15u\n", 42); //test_precision_o_higher_min_width -> printf("%15.4o", 42)pwd
 
-	lenfp1 = ft_printf("%15.4u", 424242);
+	lenfp1 = ft_printf("fp =%ik", 42, 52);
 	printf("\n");
-	lenpp1 = printf("%15.4u", 424242);
+	lenpp1 = printf("pp =%ik", 42, 52);
+	// lenpp2 = printf("%#.3o", 1);
 	printf("\n");
-	lenfp2 = ft_printf("lenf = %#.3o", 1);
-	printf("\n");
-	lenpp2 = printf("%#.3o", 1);
+	// ft_printf("%15.4o");
+	// lenfp2 = ft_printf("lenf = %#.3o", 1);
+	// printf("\n");
+	// lenpp2 = printf("%#.3o", 1);
 	printf("\n");
 	printf("lenpp1 = %i\n", lenpp1);
 	printf("lenfp1 = %i\n", lenfp1);
-	printf("lenpp1 = %i\n", lenpp2);
-	printf("lenfp1 = %i\n", lenfp2);
+	printf("\n");
+	// printf("lenpp1 = %i\n", lenpp2);
+	// printf("lenfp1 = %i\n", lenfp2);
 	// lenpp = printf("pp =%lu", -42);
 	// printf("lenpp = %i\n", lenpp);
 	// printf("lenfp = %i\n", lenfp);

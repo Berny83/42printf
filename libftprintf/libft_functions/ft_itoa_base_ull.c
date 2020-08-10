@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/02 22:43:22 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/02 22:43:22 by aagrivan         ###   ########.fr       */
+/*   Created: 2020/08/10 15:35:57 by aagrivan          #+#    #+#             */
+/*   Updated: 2020/08/10 15:48:56 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,15 @@ static unsigned long	get_length_num(unsigned long long num, int base)
 
 char					*ftbaseull(unsigned long long num, int base, char c)
 {
-	char			*str;
-	unsigned long	len;
-	long long		prod;
+	char				*str;
+	unsigned long		len;
+	long long			prod;
 
 	if (base < 2 || base > 36)
 		return (NULL);
 	len = get_length_num(num, base);
 	if (!(str = ft_strnew(len)))
- 		return (NULL);
+		return (NULL);
 	len--;
 	while (num)
 	{

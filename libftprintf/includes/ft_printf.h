@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:36:37 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/10 10:30:15 by student          ###   ########.fr       */
+/*   Updated: 2020/08/10 19:51:01 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 # define FLAGS "#0-+ "
 # define SPECIFIER "cspdiouUxXf%Z"
+# define NEEDED "#0-+ cspdiouUxXf%Z.123456789lhLjz*"
 # define BIG_BUFF 60000
 
 typedef struct			s_printf
@@ -97,6 +98,8 @@ void					ft_print_other(t_printf *f);
 
 void					ft_spacing(char c, t_printf *f, int length);
 void					ft_ispacing(char c, t_printf *f, int length);
+intmax_t				ft_get_num_modlen(t_printf *f);
+void					print_sign(t_printf *f, long long res, int length);
 uintmax_t				ft_get_unum_modlen(t_printf *f);
 
 void					init_f(t_printf *get);

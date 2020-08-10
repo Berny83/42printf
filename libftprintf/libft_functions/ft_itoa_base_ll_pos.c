@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/08/01 20:41:22 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/01 20:41:22 by aagrivan         ###   ########.fr       */
+/*   Created: 2020/08/10 15:33:44 by aagrivan          #+#    #+#             */
+/*   Updated: 2020/08/10 15:35:04 by aagrivan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static unsigned long	get_length_num(long long nbr, int base)
 	unsigned long		l;
 
 	l = (nbr == 0) ? 1 : 0;
-	while(nbr)
+	while (nbr)
 	{
 		l++;
 		nbr /= base;
@@ -37,19 +37,19 @@ static unsigned long	get_length_num(long long nbr, int base)
 	return (l);
 }
 
-char			*ft_itoa_base_ll_pos(long long num, int base)
+char					*ft_itoa_base_ll_pos(long long num, int base)
 {
-	char		*str;
-	unsigned long	len;
-	long long	prod;
-	long long	nbr;
+	char				*str;
+	unsigned long		len;
+	long long			prod;
+	long long			nbr;
 
 	if (base < 2 || base > 36)
 		return (NULL);
 	nbr = (num < 0) ? -num : num;
 	len = get_length_num(nbr, base);
 	if (!(str = ft_strnew(len)))
- 		return (NULL);
+		return (NULL);
 	len--;
 	while (nbr)
 	{

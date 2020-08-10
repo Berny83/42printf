@@ -6,7 +6,7 @@
 #    By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/09/05 17:12:11 by aagrivan          #+#    #+#              #
-#    Updated: 2020/08/09 18:29:07 by aagrivan         ###   ########.fr        #
+#    Updated: 2020/08/10 18:20:39 by aagrivan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS = ft_get_flags.c \
 		print_f.c \
 		round.c \
 		round_change.c \
-		nan_inf.c 
+		nan_inf.c \
+		ft_print_other.c
 SRC_DIR = srcs/
 SRCS_P = $(addprefix $(SRC_DIR),$(SRCS))
 
@@ -51,7 +52,7 @@ LIB_F = ft_itoa_base.c \
 		ft_itoa_base_ull.c \
 		ft_putunbr.c \
 		ft_putendl.c \
-		ft_memalloc.c
+		ft_memalloc.c 
 LIBF_DIR = libft_functions/
 LIBF_P = $(addprefix $(LIBF_DIR),$(LIB_F))
 
