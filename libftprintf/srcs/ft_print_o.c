@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+#include <stdio.h>
 
 static void				o_print_flags_without_fm(t_printf *f, int length, char zero)
 {
@@ -25,7 +26,7 @@ static void				o_print_flags_without_fm(t_printf *f, int length, char zero)
 	}
 	else if (!f->fz && (f->precis >= f->width))
 	{
-		if (f->fh && zero != '1')
+		if (f->fh && zero != '1' && f->precis <= 0)
 		{
 			ft_putchar('0');
 			f->len++;

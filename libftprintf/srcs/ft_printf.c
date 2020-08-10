@@ -49,7 +49,7 @@ t_printf		*ft_init(const char *format)
 	new->fs = '\0';
 	new->sign = 1;
 	new->lfloat = 0;
-	ft_memset(new->modln, '\0', 3);
+	ft_memset(new->modln, '\0', 4);
 	new->convs = '\0';
 	new->len = 0;
 	new->i = 0;
@@ -90,7 +90,7 @@ t_printf		*ft_reset_init(t_printf *f)
 	f->fs = '\0';
 	f->sign = 1;
 	f->lfloat = 0;
-	ft_memset(f->modln, '\0', 3);
+	ft_memset(f->modln, '\0', 4);
 	f->convs = '\0';
 	
 	return(f);
@@ -101,6 +101,7 @@ int				ft_get_all_flags(t_printf *f)
 	f->i++;
 	if (f->cpy[f->i] == '\0')
 		return(0);
+	// printf("befor flags i= %i\n", f->i);
 	get_flags_hzmps(f);
 	get_width(f);
 	if (f->cpy[f->i] == '.')
@@ -111,6 +112,7 @@ int				ft_get_all_flags(t_printf *f)
 	// printf("convers = %c\n", f->convs);
 	// printf("precision =%li\n", f->precis);
 	// printf("width = %li\n", f->width);
+	// printf("i= %i\n", f->i);
 	if (f->convs)
 		ft_print_all(f);
 	else

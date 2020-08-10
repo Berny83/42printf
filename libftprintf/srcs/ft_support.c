@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
+// #include <stdio.h>
 
 void		ft_ispacing(char c, t_printf *f, int length)
 {
@@ -45,15 +45,15 @@ uintmax_t	ft_get_unum_modlen(t_printf *f)
 	
 
 	if (f->convs == 'U')
-		num = (unsigned long)va_arg(f->avs, unsigned long int);
+	 	num = (unsigned long)va_arg(f->avs, unsigned long int);
 	else if (ft_strcmp(f->modln, "hh") == 0)
 		num = (unsigned char)va_arg(f->avs, unsigned int);
 	else if (ft_strcmp(f->modln, "h") == 0)
 		num = (unsigned short)va_arg(f->avs, unsigned int);
-	else if (ft_strcmp(f->modln, "l") == 0)
-		num = (unsigned long)va_arg(f->avs, unsigned long int);
 	else if (ft_strcmp(f->modln, "ll") == 0)
 		num = (unsigned long long)va_arg(f->avs, unsigned long long int);
+	else if (ft_strcmp(f->modln, "l") == 0)
+		num = (unsigned long)va_arg(f->avs, unsigned long int);
 	else if (ft_strcmp(f->modln, "j") == 0 || ft_strcmp(f->modln, "jz") == 0 || ft_strcmp(f->modln, "jh") == 0)
 		num = (uintmax_t)va_arg(f->avs, uintmax_t);
 	else if (ft_strcmp(f->modln, "z") == 0)

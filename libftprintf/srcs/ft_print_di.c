@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_di.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 19:26:59 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/09 19:27:14 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/10 10:42:34 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+// #include <stdio.h>
 
 static intmax_t		ft_get_num_modlen(t_printf *f)
 {
@@ -20,10 +21,10 @@ static intmax_t		ft_get_num_modlen(t_printf *f)
 		num = (signed char)va_arg(f->avs, int);
 	else if (ft_strcmp(f->modln, "h") == 0)
 		num = (short)va_arg(f->avs, int);
-	else if (ft_strcmp(f->modln, "l") == 0)
-		num = (long)va_arg(f->avs, long int);
 	else if (ft_strcmp(f->modln, "ll") == 0)
 		num = (long long)va_arg(f->avs, long long int);
+	else if (ft_strcmp(f->modln, "l") == 0)
+		num = (long)va_arg(f->avs, long int);
 	else if (ft_strcmp(f->modln, "j") == 0 || ft_strcmp(f->modln, "jz") == 0 || ft_strcmp(f->modln, "jh") == 0)
 		num = (intmax_t)va_arg(f->avs, intmax_t);
 	else if (ft_strcmp(f->modln, "z") == 0 || ft_strcmp(f->modln, "zh") == 0)
@@ -52,7 +53,7 @@ static void print_flags_with_width(t_printf *f, long long res, int length)
 			}
 			else if (f->fs && !f->fp)
 			{
-				ft_putchar('+');
+				ft_putchar(' ');
 				f->len++;
 			}
 			else if (!f->fp && !f->fs)

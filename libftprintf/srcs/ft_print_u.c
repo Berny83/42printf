@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdio.h>
 
 static void print_flags_width(t_printf *f, int length, char zero)
 {
@@ -51,7 +50,6 @@ static void print_flags_width(t_printf *f, int length, char zero)
 void					ft_print_uint(t_printf *f)
 {
 	uintmax_t		res;
-	unsigned long long res_c;
 	unsigned int		length;
 	char				*s;
 	char				zero;
@@ -59,13 +57,7 @@ void					ft_print_uint(t_printf *f)
 	zero = '0';
 	if (!(res = ft_get_unum_modlen(f)))
 		zero = '1';
-	if (res > 4294967295)
-	{
-		res_c = (unsigned long long)4294967295 + 1;
-		s = ftbaseull(res_c, 10, 'a');
-	}
-	else
-		s = ftbaseull(res, 10, 'a');
+	s = ftbaseull(res, 10, 'a');
 	length = ft_strlen(s);
 	if (f->width >= 0 && !f->fm)
 		print_flags_width(f, length, zero);

@@ -74,14 +74,26 @@ void			ft_print_address(t_printf *f)
 	char				*s;
 
 	res = (unsigned long)va_arg(f->avs, void*);
-	s = ft_itoa_base_address16(res);
+	s = ftbaseull(res, 16, 'a');
 	length = ft_strlen(s);
-	if (f->width > 0 && !f->fm)
-		ft_spacing(' ', f, length);
-	ft_putstr(s);
+	if (f->width >= 0 && !f->fm)
+	{
+		if (f->precis > f->width)
+		{
+			ft_putstr("0x");
+			ft_ispacing('0', f, length + 1);
+		}
+		else
+		{
+			ft_spacing(' ', f, length + 2);
+			ft_putstr("0x");
+		}
+	}
+	(f->fm) ? ft_putstr("0x") : 0;
+	(res == 0 && f->precis == 0) ? 0 : ft_putstr(s);
 	if (f->width > 0 && f->fm)
-		ft_spacing(' ', f, length);
-	f->len += length;
+			ft_spacing(' ', f, length + 2);
+	(res == 0 && f->precis == 0) ? (f->len += 2) : (f->len += length + 2);
 	free(s);
 }
 

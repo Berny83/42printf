@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aagrivan <aagrivan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: student <student@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/08/09 16:36:37 by aagrivan          #+#    #+#             */
-/*   Updated: 2020/08/09 18:55:38 by aagrivan         ###   ########.fr       */
+/*   Updated: 2020/08/10 10:30:15 by student          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct			s_printf
 	long int			width;
 	long int			precis;
 	int					f_prec;
-	char				modln[3];
+	char				modln[4];
 	char				convs;
 	int					sign;
 	int					lfloat;
